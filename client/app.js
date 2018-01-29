@@ -5,6 +5,9 @@ import Login from './components/Login';
 import './style.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <div id="app">
