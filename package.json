@@ -20,11 +20,6 @@
     "nodemon": "^1.14.11",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-redux": "^5.0.6",
-    "redux": "^3.7.2",
-    "redux-devtools-extension": "^2.13.2",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0",
     "style-loader": "^0.20.1"
   },
   "devDependencies": {
