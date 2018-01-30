@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import { render } from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -15,7 +16,6 @@ const mapDispatchToProps = dispatch => {
   }, dispatch)
 };
 
-
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -24,7 +24,7 @@ class Login extends Component {
       password: '',
     };
   }
-
+  
   handleUser() {
     this.setState({ user: event.target.value });
   }
@@ -32,17 +32,28 @@ class Login extends Component {
   handlePassword() {
     this.setState({ password: event.target.value });
   }
+  
+  submitForm(event) {
+    event.preventDeault();
+  }
 
   render() {
     return (
-      <div>
-        <input value={this.state.user} onChange={this.handleUser.bind(this)} type="text" />
-        <input value={this.state.password} onChange={this.handlePassword.bind(this)} type="password" />
-        <section>
-          <div>User Counter: {this.props.userCounter}</div>
-          <button onClick={() => this.props.increaseUserCounter()}>Increase Counter</button>
-          <button onClick={() => this.props.decreaseUserCounter()}>Decrease Counter</button>
-        </section>
+      <div className='login-page'>
+        <div>
+            <Link to='/portfolio'><button id='register'>register</button></Link>
+        </div>
+        <div id='title'>
+          cryptography
+        </div>
+        <div id='description'>
+          track your cryptocurrency portfolio in one place 
+        </div>
+        <form className='login' onSubmit={this.submitForm}>
+          <input id="username" value={this.state.user} onChange={this.handleUser.bind(this)} type="text"  placeholder="username"/>
+          <input id="password" value={this.state.password} onChange={this.handlePassword.bind(this)}type="password"  placeholder="password"/>
+          <Link to='/portfolio'><button id='submit' type='submit'>submit</button></Link>
+        </form>
       </div>
     );
   }
