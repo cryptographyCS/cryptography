@@ -23,16 +23,21 @@ authController.getUser = (req, res, next) => {
     'SELECT * FROM users WHERE username = $1',
     [req.body.username]
   )
-  .then(data => {
-    res.locals.dbUser = data;
+  .then(result => {
+    res.locals.dbUser = result.rows[0];
     next();
   })
   .catch(err => console.error('Error getting user:', err));
 };
 
 authController.validateUser = (req, res, next) => {
-  console.log('Validate User')
-  res.send('Validate User');
+  const user = res.locals.dbUser;
+  if (!user || !(bcrypt.compareSync(req.body.password, user.password))) {
+    console.error('user was not validated');
+    res.status(401).end();
+  } else {
+    next();
+  }
 };
 
 module.exports = authController;
