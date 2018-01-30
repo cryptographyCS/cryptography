@@ -6,17 +6,18 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 /*eslint-disable*/
 const mapStateToProps = store => ({
-  userCounter: store.user.userCounter
+  authenticated: store.user.authenticated,
+  error: store.user.error
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    increaseUserCounter: actions.increaseUserCounter,
-    decreaseUserCounter: actions.decreaseUserCounter,
+    signInUser: actions.signInUser,
   }, dispatch)
 };
 
-class Login extends Component {
+// export here for testing connected component
+export class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,7 +29,7 @@ class Login extends Component {
       email: '',
     };
   }
-  
+
   handleUser() {
     this.setState({ user: event.target.value });
   }
@@ -58,13 +59,14 @@ class Login extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className='login-page'>
         <div id='title'>
           cryptography
         </div>
         <div id='description'>
-          track your cryptocurrency portfolio in one place 
+          track your cryptocurrency portfolio in one place
         </div>
         <form className='login' onSubmit={this.submitForm}>
           <input id="username" value={this.state.user} onChange={this.handleUser.bind(this)} type="text"  placeholder="username"/>

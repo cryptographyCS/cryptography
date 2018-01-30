@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon server/server.js",
     "build": "webpack -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest ./test/*.test.js"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/test-setup.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +23,7 @@
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
     "css-loader": "^0.28.9",
+    "dotenv": "^5.0.0",
     "express": "^4.16.2",
     "nodemon": "^1.14.11",
     "pg": "^7.4.1",
@@ -33,7 +37,11 @@
   },
   "devDependencies": {
     "babel-polyfill": "^6.26.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "html-webpack-plugin": "^2.30.1",
+    "jest": "^22.1.4",
+    "react-test-renderer": "^16.2.0",
     "redux-logger": "^3.0.6",
     "webpack": "^3.10.0"
   }

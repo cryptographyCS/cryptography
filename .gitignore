@@ -61,8 +61,14 @@ typings/
 # next.js build output
 .next
 
+# Build files
+build/*
+
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+#SQL Override
+!*.sql
