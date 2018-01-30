@@ -53,6 +53,7 @@ class Login extends Component {
           <input id="username" value={this.state.user} onChange={this.handleUser.bind(this)} type="text"  placeholder="username"/>
           <input id="password" value={this.state.password} onChange={this.handlePassword.bind(this)}type="password"  placeholder="password"/>
           <Link to='/portfolio'><button id='submit' type='submit'>submit</button></Link>
+          <Link to='/portfolio' id='forgot' >forgot password?</Link>
         </form>
       </div>
     );
