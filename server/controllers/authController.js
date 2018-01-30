@@ -11,8 +11,8 @@ authController.signup = (req, res, next) => {
   db.query(
     'INSERT INTO users (username, password, last_active) VALUES ($1, $2, $3) RETURNING *;',
     [req.body.username, password, date]
-  ).then(data => { 
-      console.log(data);
+  ).then(result => { 
+      res.locals.result = result.rows[0];
       next();
     }
   ).catch(err => console.error('Error creating user', err.stack));
@@ -20,18 +20,18 @@ authController.signup = (req, res, next) => {
 
 authController.getUser = (req, res, next) => {
   db.query(
-    'SELECT * FROM users WHERE username = $1',
+    'SELECT * FROM users WHERE username = $1;',
     [req.body.username]
   )
   .then(result => {
-    res.locals.dbUser = result.rows[0];
+    res.locals.result = result.rows[0];
     next();
   })
   .catch(err => console.error('Error getting user:', err));
 };
 
 authController.validateUser = (req, res, next) => {
-  const user = res.locals.dbUser;
+  const user = res.locals.result;
   if (!user || !(bcrypt.compareSync(req.body.password, user.password))) {
     console.error('user was not validated');
     res.status(401).end();
