@@ -12,17 +12,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use(express.static(path.resolve(__dirname, 'build')));
+app.use(express.static(path.resolve(__dirname, '../build')));
 
-app.post('api/login', authController.login, (req, res) => {
-  res.send('Login');
-});
-
-app.post('api/signup',
+app.post('/api/login', 
   authController.getUser,
   authController.validateUser,
+  (req, res) => {
+    res.send('Login');
+});
+
+app.post('/api/signup',
+  authController.signup,
   (req, res) => {
     res.send('Signup');
 });
 
-app.listen(3000);
+app.listen(3000, () => console.log('Server listening on port 3000'));
