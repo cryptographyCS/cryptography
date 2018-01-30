@@ -16,15 +16,17 @@ const mapDispatchToProps = dispatch => {
   }, dispatch)
 };
 
-class Login extends Component {
+// export here for testing connected component
+export class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       user: '',
       password: '',
     };
+    this.handleUser = this.handleUser.bind(this);
   }
-  
+
   handleUser() {
     this.setState({ user: event.target.value });
   }
@@ -32,7 +34,7 @@ class Login extends Component {
   handlePassword() {
     this.setState({ password: event.target.value });
   }
-  
+
   submitForm(event) {
     event.preventDeault();
   }
@@ -41,17 +43,17 @@ class Login extends Component {
     return (
       <div className='login-page'>
         <div>
-            <Link to='/portfolio'><button id='register'>register</button></Link>
+          <Link to='/portfolio'><button id='register'>register</button></Link>
         </div>
         <div id='title'>
           cryptography
         </div>
         <div id='description'>
-          track your cryptocurrency portfolio in one place 
+          track your cryptocurrency portfolio in one place
         </div>
         <form className='login' onSubmit={this.submitForm}>
-          <input id="username" value={this.state.user} onChange={this.handleUser.bind(this)} type="text"  placeholder="username"/>
-          <input id="password" value={this.state.password} onChange={this.handlePassword.bind(this)}type="password"  placeholder="password"/>
+          <input id="username" value={this.state.user} onChange={this.handleUser} type="text" placeholder="username" />
+          <input id="password" value={this.state.password} onChange={this.handlePassword.bind(this)} type="password" placeholder="password" />
           <Link to='/portfolio'><button id='submit' type='submit'>submit</button></Link>
         </form>
       </div>
