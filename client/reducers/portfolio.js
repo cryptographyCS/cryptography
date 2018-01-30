@@ -1,10 +1,10 @@
-import * as TYPES from '../constants';
+import * as TYPES from '../constants/actionTypes';
 
 const intitialState = {
   portfolioCounter: 0
 };
 
-const portfolioReducer = (state = intitialState, action) => {
+const portfolio = (state = intitialState, action) => {
   switch (action.type) {
     case TYPES.INCREASE_PORTFOLIO_COUNTER:
       return {
@@ -21,4 +21,4 @@ const portfolioReducer = (state = intitialState, action) => {
   }
 }
 
-export default portfolioReducer;
+export default portfolio;

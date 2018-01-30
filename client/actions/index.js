@@ -1,32 +1,32 @@
-import * as TYPES from '../constants';
+import * as TYPES from '../constants/actionTypes';
 
 const increaseUserCounter = () => {
   return {
-    type: INCREASE_USER_COUNTER
+    type: TYPES.INCREASE_USER_COUNTER
   }
 }
 
 const decreaseUserCounter = () => {
   return {
-    type: DECREASE_USER_COUNTER
+    type: TYPES.DECREASE_USER_COUNTER
   }
 }
 
-const increaseExchangeCounter = () => {
+const increasePortfolioCounter = () => {
   return {
-    type: INCREASE_PORTFOLIO_COUNTER
+    type: TYPES.INCREASE_PORTFOLIO_COUNTER
   }
 }
 
-const decreaseExchangeCounter = () => {
+const decreasePortfolioCounter = () => {
   return {
-    type: DECREASE_PORTFOLIO_COUNTER
+    type: TYPES.DECREASE_PORTFOLIO_COUNTER
   }
 }
 
 module.exports = {
   increaseUserCounter,
   decreaseUserCounter,
-  increaseExchangeCounter,
-  decreaseExchangeCounter
+  increasePortfolioCounter,
+  decreasePortfolioCounter
 }

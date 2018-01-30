@@ -1,13 +1,14 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Provder } from 'react-redux';
+import { Provider } from 'react-redux';
 import store from './store';
 import App from './App';
 
+const initializeStore = store();
 
 render(
-  <Provder store={store}>
+  <Provider store={initializeStore}>
     <App />
-  </Provder>,
+  </Provider>,
   document.getElementById('root'));
 

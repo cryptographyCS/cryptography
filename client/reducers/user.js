@@ -1,10 +1,10 @@
-import * as TYPES from '../constants';
+import * as TYPES from '../constants/actionTypes';
 
 const intitialState = {
   userCounter: 0
 };
 
-const userReducer = (state = intitialState, action) => {
+const user = (state = intitialState, action) => {
   switch (action.type) {
     case TYPES.INCREASE_USER_COUNTER:
       return {
@@ -21,4 +21,4 @@ const userReducer = (state = intitialState, action) => {
   }
 }
 
-export default userReducer;
+export default user;
