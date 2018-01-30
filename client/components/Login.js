@@ -35,12 +35,6 @@ class Login extends Component {
   
   submitForm(event) {
     event.preventDeault();
-    console.log('Form was submitted');
-    fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: this.state.user, password: this.state.password })
-    }).then(res => console.log(res))
   }
 
   render() {

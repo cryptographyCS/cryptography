@@ -19,7 +19,6 @@ authController.signup = (req, res, next) => {
 };
 
 authController.getUser = (req, res, next) => {
-  console.log('Get User')
   db.query(
     'SELECT * FROM users WHERE username = $1',
     [req.body.username]
@@ -32,7 +31,7 @@ authController.getUser = (req, res, next) => {
 };
 
 authController.validateUser = (req, res, next) => {
-  console.log('Validate user')
+  console.log('Validate User')
   res.send('Validate User');
 };
 
