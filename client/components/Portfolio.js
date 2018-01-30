@@ -1,5 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import { render } from 'react-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+
+const mapStateToProps = store => ({
+  portfolioCounter: store.portfolio.portfolioCounter
+});
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    increasePortfolioCounter: actions.increasePortfolioCounter,
+    decreasePortfolioCounter: actions.decreasePortfolioCounter,
+  }, dispatch)
+};
+
 
 class Portfolio extends Component {
   constructor(props) {
@@ -76,4 +92,4 @@ class Portfolio extends Component {
   }
 }
 
-export default Portfolio;
+export default connect(mapStateToProps, mapDispatchToProps)(Portfolio);

@@ -6,6 +6,9 @@ import Portfolio from './components/Portfolio';
 import './style.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <main>

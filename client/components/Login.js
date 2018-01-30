@@ -1,5 +1,20 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import { render } from 'react-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
+
+const mapStateToProps = store => ({
+  userCounter: store.user.userCounter
+});
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    increaseUserCounter: actions.increaseUserCounter,
+    decreaseUserCounter: actions.decreaseUserCounter,
+  }, dispatch)
+};
 
 class Login extends Component {
   constructor(props) {
@@ -44,4 +59,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
