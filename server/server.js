@@ -7,6 +7,8 @@ const bcrypt = require('bcrypt');
 const pg = require('pg');
 const request = require('request');
 const url = require('url');
+// const coinbase = require('coinbase');
+const Client = require('coinbase').Client;
 
 const authController = require('./controllers/authController');
 const apiController = require('./controllers/apiController');
@@ -60,22 +62,38 @@ app.get('/coinbase/redirect', (req, res) => {
       //body.token_type: 'bearer',
       //body.expires_in: 7200,
 
-      // make API call once token is acquired
+      const client = new Client({'accessToken': body.access_token, 'refreshToken': body.refresh_token});
+      client.getAccounts({}, function(err, accounts) {
+        accounts.forEach(account => {
+          console.log('bal: ' + account.balance.amount + ' currency: ' + account.balance.currency);
+        });
+      });
+
+
+      // make API call for getUser once token is acquired
       request('https://api.coinbase.com/v2/user', {
         'headers': { 'Authorization': `Bearer ${body.access_token}`,
+          'CB-VERSION': process.env.COINBASE_VERSION,
           'content-type': 'application/JSON'}
         }, (error, response, body) => {
             if (!error && response.statusCode == 200) {
 
-              // body is user profile data
-              console.log('body is: ', body);
+              // body is user profile data with ID
+              body = JSON.parse(body);
+              // console.log('body is: ', body);
+
+              //using coinbase API - getUser
+              // client.getUser(body.data.id, (err, user) => {
+              //   console.log('user is: ', user);
+              // });
+
             }
             else console.log('error', response.statusCode, body);
           })
 
 
     }
-    else console.log('error', response.statusCode, body);
+    else console.log('error', body);
   })
 
 })

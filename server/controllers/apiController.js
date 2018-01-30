@@ -10,6 +10,8 @@ let coinbase_API_authURL = `https://www.coinbase.com/oauth/authorize?response_ty
 &client_id=${process.env.COINBASE_CLIENT_ID}\
 &redirect_uri=${coinbase_API.redirect_URI}\
 &state=${coinbase_API.state}\
-&scope=${coinbase_API.scope}`
+&scope=${coinbase_API.scope}\
+&account=all`
+
 
 module.exports = { coinbase_API, coinbase_API_authURL };
