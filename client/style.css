@@ -1,0 +1,92 @@
+/* Application */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgb(241, 245, 244);
+}
+
+/* Login */
+
+#title {
+  margin-top: 10vw;
+  font-size: 3em;
+  text-align: center;
+}
+
+#description {
+  font-size: .7em;
+  font-style: italic;
+  text-align: center;
+  margin-top: 1vw;
+}
+
+.login {
+  text-align: center;
+  margin-top: 5vw;
+}
+
+#username {
+  margin-right: 1vw;
+  border-radius: 2px;
+}
+#username:focus {
+  outline: 0;
+}
+
+#password {
+  margin-right: 1vw;
+  border-radius: 2px;
+}
+
+#password:focus {
+  outline: 0;
+}
+
+#submit {
+  border-radius: 2px;
+  text-decoration: none;
+}
+
+#submit:hover {
+  background-color: rgb(167, 228, 154);
+  border-radius: 2px;
+}
+
+#submit:focus {
+  outline: 0;
+}
+
+#register {
+  position:absolute;
+  top:5vw;
+  right: 18vw;
+  font-size: .8em;
+  margin-top: .2vw;
+  background-color: rgb(249, 174, 174);
+  border-radius: 2px;
+  text-decoration: none;
+}
+
+#register:hover {
+  background-color: rgb(247, 200, 200);
+  border-radius: 2px;
+
+}
+
+/* Portfolio */
+
+.coinsBox {
+  border: solid rgba(36, 26, 26, 0.166) 1px;
+}
+
+.coinsBox:nth-child(even) {
+  background-color: rgb(224, 238, 223);
+}
+
+.coinsBox:nth-child(odd) {
+  background-color: rgb(218, 137, 186);
+}
+
+.coinBox {
+  border: solid rgba(36, 26, 26, 0.166) 1px;
+}
+
