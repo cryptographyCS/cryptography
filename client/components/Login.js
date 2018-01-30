@@ -24,7 +24,6 @@ export class Login extends Component {
       user: '',
       password: '',
     };
-    this.handleUser = this.handleUser.bind(this);
   }
 
   handleUser() {
@@ -52,7 +51,7 @@ export class Login extends Component {
           track your cryptocurrency portfolio in one place
         </div>
         <form className='login' onSubmit={this.submitForm}>
-          <input id="username" value={this.state.user} onChange={this.handleUser} type="text" placeholder="username" />
+          <input id="username" value={this.state.user} onChange={this.handleUser.bind(this)} type="text" placeholder="username" />
           <input id="password" value={this.state.password} onChange={this.handlePassword.bind(this)} type="password" placeholder="password" />
           <Link to='/portfolio'><button id='submit' type='submit'>submit</button></Link>
         </form>
