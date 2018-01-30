@@ -13,12 +13,16 @@ const authError = (TYPE, error) => {
 /**
  * Sign up user
  */
-const signUpUser = (props) => {
-  const { username, password } = props;
+const signUpUser = (state) => {
+  const { registerUser, registerPassword2 } = state;
+  const username = registerUser;
+  const password = registerPassword2;
+  console.log(`username: ${username}`);
+  console.log(`password: ${password}`);
   return function (dispatch) {
     fetch('/api/signup', {
       method: 'POST',
-      headers: { 'Content-type': 'response/json' },
+      headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({ username, password })
     })
       .then(response => response.json())
@@ -35,7 +39,7 @@ const signInUser = (props) => {
   return function (dispatch) {
     fetch('/api/login', {
       method: 'POST',
-      headers: { 'Content-type': 'response/json' },
+      headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({ username, password })
     })
       .then(response => response.json())

@@ -24,34 +24,34 @@ body {
   margin-top: 5vw;
 }
 
-#username {
+.username {
   margin-right: 1vw;
   border-radius: 2px;
 }
-#username:focus {
+.username:focus {
   outline: 0;
 }
 
-#password {
+.password {
   margin-right: 1vw;
   border-radius: 2px;
 }
 
-#password:focus {
+.password:focus {
   outline: 0;
 }
 
-#submit {
+.submit {
   border-radius: 2px;
   text-decoration: none;
 }
 
-#submit:hover {
+.submit:hover {
   background-color: rgb(167, 228, 154);
   border-radius: 2px;
 }
 
-#submit:focus {
+.submit:focus {
   outline: 0;
 }
 

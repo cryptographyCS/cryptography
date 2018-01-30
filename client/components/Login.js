@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-
+/*eslint-disable*/
 const mapStateToProps = store => ({
   authenticated: store.user.authenticated,
   signup: store.user.signup,
@@ -25,7 +25,15 @@ export class Login extends Component {
     this.state = {
       username: '',
       password: '',
+      registerUser: '',
+      registerPassword: '',
+      registerPassword2: '',
+      email: '',
     };
+    this.handleRegisterUser = this.handleRegisterUser.bind(this);
+    this.handleRegisterPassword = this.handleRegisterPassword.bind(this);
+    this.handleRegisterPassword2 = this.handleRegisterPassword2.bind(this);
+    this.handleEmail = this.handleEmail.bind(this);
   }
 
   handleUser() {
@@ -36,29 +44,53 @@ export class Login extends Component {
     this.setState({ password: event.target.value });
   }
 
+  handleRegisterUser(event) {
+    this.setState({ registerUser: event.target.value });
+  }
+
+  handleRegisterPassword(event) {
+    this.setState({ registerPassword: event.target.value });
+  }
+
+  handleRegisterPassword2(event) {
+    this.setState({ registerPassword2: event.target.value });
+  }
+
+  handleEmail(event) {
+    this.setState({ email: event.target.value });
+  }
+
   submitForm(event) {
     event.preventDeault();
   }
 
   render() {
-    console.log(this.props);
+    console.log(this.state.registerUser);
+    console.log(this.state.registerPassword2);
     return (
       <div className='login-page'>
-        <div>
-          <Link to='/portfolio'><button id='register'>register</button></Link>
-        </div>
         <div id='title'>
           cryptography
         </div>
         <div id='description'>
           track your cryptocurrency portfolio in one place
         </div>
-        <div className='login'>
-          <input id="username" value={this.state.username} onChange={this.handleUser.bind(this)} type="text" placeholder="username" />
-          <input id="password" value={this.state.password} onChange={this.handlePassword.bind(this)} type="password" placeholder="password" />
-          <button id='submit' onClick={() => this.props.signUpUser(this.state)}>submit</button>
-          {/* <Link to='/portfolio'><button id='submit' type='submit' onClick={() => this.props.signUpUser(this.state)}>submit</button></Link>
-          <Link to='/portfolio' id='forgot' >forgot password?</Link> */}
+        <form className='login' onSubmit={this.submitForm}>
+          <input className='username' value={this.state.user} onChange={this.handleUser.bind(this)} type="text" placeholder="username" />
+          <input className='password' value={this.state.password} onChange={this.handlePassword.bind(this)} type="password" placeholder="password" />
+          <Link to='/portfolio'><button className='submit' type='submit'>submit</button></Link>
+          <Link to='/portfolio' id='forgot' >forgot password?</Link>
+        </form>
+        <div id='registration-section'>
+          <hr />
+          <div>Register</div>
+          <div className='registration-form'>
+            <input className='username' onChange={(event) => this.handleRegisterUser(event)} type="text" placeholder="username" />
+            <input className='password' onChange={(event) => this.handleRegisterPassword(event)} type="password" placeholder="password" />
+            <input className='password' onChange={(event) => this.handleRegisterPassword2(event)} type="password" placeholder="password" />
+            <input className='username' onChange={this.handleEmail.bind(this)} type="text" placeholder="email" />
+            <button className='submit' onClick={() => this.props.signUpUser(this.state)}>submit</button>
+          </div>
         </div>
       </div>
     );
