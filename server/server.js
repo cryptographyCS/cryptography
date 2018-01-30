@@ -2,8 +2,6 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const bcrypt = require('bcrypt');
-const pg = require('pg');
 
 const authController = require('./controllers/authController');
 const apiController = require('./controllers/apiController');
@@ -15,5 +13,16 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use(express.static(path.resolve(__dirname, 'build')));
+
+app.post('api/login', authController.login, (req, res) => {
+  res.send('Login');
+});
+
+app.post('api/signup',
+  authController.getUser,
+  authController.validateUser,
+  (req, res) => {
+    res.send('Signup');
+});
 
 app.listen(3000);
