@@ -14,17 +14,17 @@ app.use(cookieParser());
 
 app.use(express.static(path.resolve(__dirname, '../build')));
 
-app.post('/api/login', 
+app.post('/api/login',
   authController.getUser,
   authController.validateUser,
   (req, res) => {
     res.send('Login');
-});
+  });
 
 app.post('/api/signup',
   authController.signup,
   (req, res) => {
     res.send('Signup');
-});
+  });
 
 app.listen(3000, () => console.log('Server listening on port 3000'));

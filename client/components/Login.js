@@ -7,12 +7,14 @@ import * as actions from '../actions';
 
 const mapStateToProps = store => ({
   authenticated: store.user.authenticated,
+  signup: store.user.signup,
   error: store.user.error
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     signInUser: actions.signInUser,
+    signUpUser: actions.signUpUser,
   }, dispatch)
 };
 
@@ -21,13 +23,13 @@ export class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: '',
+      username: '',
       password: '',
     };
   }
 
   handleUser() {
-    this.setState({ user: event.target.value });
+    this.setState({ username: event.target.value });
   }
 
   handlePassword() {
@@ -51,12 +53,13 @@ export class Login extends Component {
         <div id='description'>
           track your cryptocurrency portfolio in one place
         </div>
-        <form className='login' onSubmit={this.submitForm}>
-          <input id="username" value={this.state.user} onChange={this.handleUser.bind(this)} type="text" placeholder="username" />
+        <div className='login'>
+          <input id="username" value={this.state.username} onChange={this.handleUser.bind(this)} type="text" placeholder="username" />
           <input id="password" value={this.state.password} onChange={this.handlePassword.bind(this)} type="password" placeholder="password" />
-          <Link to='/portfolio'><button id='submit' type='submit'>submit</button></Link>
-          <Link to='/portfolio' id='forgot' >forgot password?</Link>
-        </form>
+          <button id='submit' onClick={() => this.props.signUpUser(this.state)}>submit</button>
+          {/* <Link to='/portfolio'><button id='submit' type='submit' onClick={() => this.props.signUpUser(this.state)}>submit</button></Link>
+          <Link to='/portfolio' id='forgot' >forgot password?</Link> */}
+        </div>
       </div>
     );
   }
