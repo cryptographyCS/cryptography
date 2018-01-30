@@ -34,7 +34,6 @@ class Login extends Component {
   }
 
   render() {
-    console.log(`userCounter: ${JSON.stringify(this.props, null, 2)}`);
     return (
       <div>
         <input value={this.state.user} onChange={this.handleUser.bind(this)} type="text" />

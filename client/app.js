@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Login from './components/Login';
-// import Portfolio from './components/Portfolio';
+import Portfolio from './components/Portfolio';
 import './style.css';
 
 class App extends Component {
@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <div id="app">
         <Login />
-        {/* <Portfolio /> */}
+        <Portfolio />
       </div>
     );
   }
