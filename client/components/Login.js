@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-
+/*eslint-disable*/
 const mapStateToProps = store => ({
   userCounter: store.user.userCounter
 });
@@ -22,6 +22,10 @@ class Login extends Component {
     this.state = {
       user: '',
       password: '',
+      registerUser: '',
+      registerPassword: '',
+      registerPassword2: '',
+      email: '',
     };
   }
   
@@ -33,6 +37,22 @@ class Login extends Component {
     this.setState({ password: event.target.value });
   }
   
+  handleRegisterUser() {
+    this.setState({ registerUser: event.target.value });
+  }
+  
+  handleRegisterPassword() {
+    this.setState({ registerPassword: event.target.value });
+  }
+  
+  handleRegisterPassword2() {
+    this.setState({ registerPassword2: event.target.value });
+  }
+  
+  handleEmail() {
+    this.setState({ email: event.target.value });
+  }
+  
   submitForm(event) {
     event.preventDeault();
   }
@@ -40,9 +60,6 @@ class Login extends Component {
   render() {
     return (
       <div className='login-page'>
-        <div>
-            <Link to='/portfolio'><button id='register'>register</button></Link>
-        </div>
         <div id='title'>
           cryptography
         </div>
@@ -51,10 +68,21 @@ class Login extends Component {
         </div>
         <form className='login' onSubmit={this.submitForm}>
           <input id="username" value={this.state.user} onChange={this.handleUser.bind(this)} type="text"  placeholder="username"/>
-          <input id="password" value={this.state.password} onChange={this.handlePassword.bind(this)}type="password"  placeholder="password"/>
+          <input id="password" value={this.state.password} onChange={this.handlePassword.bind(this)} type="password"  placeholder="password"/>
           <Link to='/portfolio'><button id='submit' type='submit'>submit</button></Link>
           <Link to='/portfolio' id='forgot' >forgot password?</Link>
         </form>
+        <div id='registration-section'>
+          <hr/>
+          <div>Register</div>
+          <form className='registration-form' onSubmit={this.submitForm}>
+            <input id="username" value={this.state.registerUser} onChange={this.handleRegisterUser.bind(this)} type="text"  placeholder="username"/>
+            <input id="password" value={this.state.registerPassword} onChange={this.handleRegisterPassword.bind(this)} type="password"  placeholder="password"/>
+            <input id="password" value={this.state.registerPassword2} onChange={this.handleRegisterPassword2.bind(this)} type="password"  placeholder="password"/>
+            <input id="username" value={this.state.email} onChange={this.handleEmail.bind(this)}type="text"  placeholder="email"/>
+            <Link to='/settings'><button id='submit' type='submit'>submit</button></Link>
+          </form>
+        </div>
       </div>
     );
   }
