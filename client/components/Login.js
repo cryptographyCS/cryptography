@@ -6,13 +6,13 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 const mapStateToProps = store => ({
-  userCounter: store.user.userCounter
+  authenticated: store.user.authenticated,
+  error: store.user.error
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    increaseUserCounter: actions.increaseUserCounter,
-    decreaseUserCounter: actions.decreaseUserCounter,
+    signInUser: actions.signInUser,
   }, dispatch)
 };
 
@@ -39,6 +39,7 @@ export class Login extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className='login-page'>
         <div>
