@@ -18,13 +18,13 @@ app.post('/api/login',
   authController.getUser,
   authController.validateUser,
   (req, res) => {
-    res.send('Login');
+    res.json(res.locals.result);
 });
 
 app.post('/api/signup',
   authController.signup,
   (req, res) => {
-    res.send('Signup');
+    res.json(res.locals.result);
 });
 
 app.listen(3000, () => console.log('Server listening on port 3000'));
