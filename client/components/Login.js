@@ -6,13 +6,13 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 const mapStateToProps = store => ({
-  userCounter: store.user.userCounter
+  authenticated: store.user.authenticated,
+  error: store.user.error
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    increaseUserCounter: actions.increaseUserCounter,
-    decreaseUserCounter: actions.decreaseUserCounter,
+    signInUser: actions.signInUser,
   }, dispatch)
 };
 
@@ -39,6 +39,7 @@ export class Login extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className='login-page'>
         <div>
@@ -54,6 +55,7 @@ export class Login extends Component {
           <input id="username" value={this.state.user} onChange={this.handleUser.bind(this)} type="text" placeholder="username" />
           <input id="password" value={this.state.password} onChange={this.handlePassword.bind(this)} type="password" placeholder="password" />
           <Link to='/portfolio'><button id='submit' type='submit'>submit</button></Link>
+          <Link to='/portfolio' id='forgot' >forgot password?</Link>
         </form>
       </div>
     );
