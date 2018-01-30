@@ -2,8 +2,6 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const bcrypt = require('bcrypt');
-const pg = require('pg');
 
 const authController = require('./controllers/authController');
 const apiController = require('./controllers/apiController');
@@ -14,6 +12,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use(express.static(path.resolve(__dirname, 'build')));
+app.use(express.static(path.resolve(__dirname, '../build')));
 
-app.listen(3000);
+app.post('/api/login', 
+  authController.getUser,
+  authController.validateUser,
+  (req, res) => {
+    res.send('Login');
+});
+
+app.post('/api/signup',
+  authController.signup,
+  (req, res) => {
+    res.send('Signup');
+});
+
+app.listen(3000, () => console.log('Server listening on port 3000'));

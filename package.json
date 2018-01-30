@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon server/server.js",
     "build": "webpack -w",
     "test": "jest ./test/*.test.js"
   },
@@ -23,6 +23,7 @@
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
     "css-loader": "^0.28.9",
+    "dotenv": "^5.0.0",
     "express": "^4.16.2",
     "nodemon": "^1.14.11",
     "pg": "^7.4.1",
