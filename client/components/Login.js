@@ -69,20 +69,20 @@ export class Login extends Component {
           track your cryptocurrency portfolio in one place
         </div>
         <form className='login' onSubmit={this.submitForm}>
-          <input id="username" value={this.state.user} onChange={this.handleUser.bind(this)} type="text"  placeholder="username"/>
-          <input id="password" value={this.state.password} onChange={this.handlePassword.bind(this)} type="password"  placeholder="password"/>
-          <Link to='/portfolio'><button id='submit' type='submit'>submit</button></Link>
+          <input className='username' value={this.state.user} onChange={this.handleUser.bind(this)} type="text"  placeholder="username"/>
+          <input className='password' value={this.state.password} onChange={this.handlePassword.bind(this)} type="password"  placeholder="password"/>
+          <Link to='/portfolio'><button className='submit' type='submit'>submit</button></Link>
           <Link to='/portfolio' id='forgot' >forgot password?</Link>
         </form>
         <div id='registration-section'>
           <hr/>
           <div>Register</div>
           <form className='registration-form' onSubmit={this.submitForm}>
-            <input id="username" value={this.state.registerUser} onChange={this.handleRegisterUser.bind(this)} type="text"  placeholder="username"/>
-            <input id="password" value={this.state.registerPassword} onChange={this.handleRegisterPassword.bind(this)} type="password"  placeholder="password"/>
-            <input id="password" value={this.state.registerPassword2} onChange={this.handleRegisterPassword2.bind(this)} type="password"  placeholder="password"/>
-            <input id="username" value={this.state.email} onChange={this.handleEmail.bind(this)}type="text"  placeholder="email"/>
-            <Link to='/settings'><button id='submit' type='submit'>submit</button></Link>
+            <input className='username' value={this.state.registerUser} onChange={this.handleRegisterUser.bind(this)} type="text"  placeholder="username"/>
+            <input className='password' value={this.state.registerPassword} onChange={this.handleRegisterPassword.bind(this)} type="password"  placeholder="password"/>
+            <input className='password' value={this.state.registerPassword2} onChange={this.handleRegisterPassword2.bind(this)} type="password"  placeholder="password"/>
+            <input className='username' value={this.state.email} onChange={this.handleEmail.bind(this)}type="text"  placeholder="email"/>
+            <Link to='/settings'><button className='submit' type='submit'>submit</button></Link>
           </form>
         </div>
       </div>
