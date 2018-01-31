@@ -25,13 +25,13 @@ app.post('/api/login',
   authController.validateUser,
   (req, res) => {
     res.json(res.locals.result);
-});
+  });
 
 app.post('/api/signup',
   authController.signup,
   (req, res) => {
     res.json(res.locals.result);
-});
+  });
 
 // route for coinbase OAuth
 app.get('/coinbase/auth', (req, res) => {
