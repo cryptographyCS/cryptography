@@ -6,6 +6,17 @@ body {
 
 /* Login */
 
+.login-page {
+  text-align: center;
+}
+
+#line {
+  width: 60vw;
+  margin-top: 3em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #title {
   margin-top: 10vw;
   font-size: 3em;
@@ -20,8 +31,18 @@ body {
 }
 
 .login {
-  text-align: center;
-  margin-top: 5vw;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  margin-right: 40px;
+  margin-left: 40px;
+}
+
+input {
+  width: 250px;
+  margin-top: 10px;
+  padding: 5px;
+  font-size: .8em;
 }
 
 .username {
@@ -44,6 +65,11 @@ body {
 .submit {
   border-radius: 2px;
   text-decoration: none;
+  margin-top: 10px;
+  width: 80px;
+  background-color: rgb(139, 236, 118);
+  padding: 5px;
+  font-size: 1em;
 }
 
 .submit:hover {
@@ -54,6 +80,34 @@ body {
 .submit:focus {
   outline: 0;
 }
+
+.submit-sign-up {
+  border-radius: 2px;
+  text-decoration: none;
+  margin-top: 10px;
+  width: 80px;
+  background-color: rgb(149, 167, 145);
+  padding: 5px;
+  font-size: 1em;
+}
+
+.submit-sign-up:hover {
+  background-color: rgb(156, 172, 152);
+  border-radius: 2px;
+}
+
+.submit-sign-up:focus {
+  outline: 0;
+}
+
+#registration-form {
+  margin-top: 50px;
+}
+
+#registration-text {
+  margin-bottom: 1.5em;
+}
+
 
 #register {
   position:absolute;
@@ -78,7 +132,9 @@ body {
 #forgot {
   font-size: .5em;
   display: block;
-  margin-top: 2em;
+  margin-left: 2em;
+  margin-top: 1.7em;
+  text-decoration: none;
 }
 
 /* Portfolio */
@@ -96,6 +152,11 @@ body {
 
 #logout:focus {
   outline: 0;
+}
+
+.right-head {
+  position: absolute;
+  margin-left: 50px;
 }
 
 #total {
@@ -149,4 +210,20 @@ div.coinsBox > div:nth-of-type(odd) {
 .amountInBTC {
   justify-self: end;
   margin-right: 1.4em;
+}
+
+
+/* Settings */
+
+#settings-images {
+  display: grid;
+  grid-template-columns: minmax(200px, 400px);
+  grid-row-gap: 1em;
+  grid-auto-rows: 50px;
+  margin-top: 2em;
+}
+
+.logo-img {
+  max-width: 80%;
+  max-height: 80%; 
 }

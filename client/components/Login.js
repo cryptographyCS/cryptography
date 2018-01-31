@@ -65,24 +65,26 @@ export class Login extends Component {
         <div id='title'>
           cryptography
         </div>
-        <div id='description'>
+        {/* <div id='description'>
           track your cryptocurrency portfolio in one place
-        </div>
+        </div> */}
         <form className='login' onSubmit={this.submitForm}>
           <input className='username' value={this.state.user} onChange={this.handleUser.bind(this)} type="text"  placeholder="username"/>
           <input className='password' value={this.state.password} onChange={this.handlePassword.bind(this)} type="password"  placeholder="password"/>
-          <Link to='/portfolio'><button className='submit' type='submit'>submit</button></Link>
+          <br></br>
+          <Link to='/portfolio'><button className='submit' type='submit'>log in</button></Link>
           <Link to='/portfolio' id='forgot' >forgot password?</Link>
         </form>
+        <div id="line"> <hr/> </div>
         <div id='registration-section'>
-          <hr/>
-          <div>Register</div>
-          <form className='registration-form' onSubmit={this.submitForm}>
+          <form id='registration-form' onSubmit={this.submitForm}>
+            <div id="registration-text">sign up to track your entire cryptocurrency portfolio in one place</div>
             <input className='username' value={this.state.registerUser} onChange={this.handleRegisterUser.bind(this)} type="text"  placeholder="username"/>
             <input className='password' value={this.state.registerPassword} onChange={this.handleRegisterPassword.bind(this)} type="password"  placeholder="password"/>
             <input className='password' value={this.state.registerPassword2} onChange={this.handleRegisterPassword2.bind(this)} type="password"  placeholder="password"/>
             <input className='username' value={this.state.email} onChange={this.handleEmail.bind(this)}type="text"  placeholder="email"/>
-            <Link to='/settings'><button className='submit' type='submit'>submit</button></Link>
+            <br></br>
+            <Link to='/settings'><button className='submit-sign-up' type='submit'>sign up</button></Link>
           </form>
         </div>
       </div>
