@@ -30,17 +30,19 @@ export class Login extends Component {
       registerPassword2: '',
       email: '',
     };
+    this.handleUser = this.handleUser.bind(this);
+    this.handlePassword = this.handlePassword.bind(this);
     this.handleRegisterUser = this.handleRegisterUser.bind(this);
     this.handleRegisterPassword = this.handleRegisterPassword.bind(this);
     this.handleRegisterPassword2 = this.handleRegisterPassword2.bind(this);
     this.handleEmail = this.handleEmail.bind(this);
   }
 
-  handleUser() {
+  handleUser(event) {
     this.setState({ username: event.target.value });
   }
 
-  handlePassword() {
+  handlePassword(event) {
     this.setState({ password: event.target.value });
   }
 
@@ -65,8 +67,8 @@ export class Login extends Component {
   }
 
   render() {
-    console.log(this.state.registerUser);
-    console.log(this.state.registerPassword2);
+    console.log(this.state.username);
+    console.log(this.state.password);
     return (
       <div className='login-page'>
         <div id='title'>
@@ -75,20 +77,20 @@ export class Login extends Component {
         <div id='description'>
           track your cryptocurrency portfolio in one place
         </div>
-        <form className='login' onSubmit={this.submitForm}>
-          <input className='username' value={this.state.user} onChange={this.handleUser.bind(this)} type="text" placeholder="username" />
-          <input className='password' value={this.state.password} onChange={this.handlePassword.bind(this)} type="password" placeholder="password" />
-          <Link to='/portfolio'><button className='submit' type='submit'>submit</button></Link>
-          <Link to='/portfolio' id='forgot' >forgot password?</Link>
-        </form>
+        <div className='login'>
+          <input className='username' onChange={event => this.handleUser(event)} type="text" placeholder="username" />
+          <input className='password' onChange={event => this.handlePassword(event)} type="password" placeholder="password" />
+          <button className='submit' onClick={() => this.props.signInUser(this.state)}>submit</button>
+          {/* <Link to='/portfolio' id='forgot' >forgot password?</Link> */}
+        </div>
         <div id='registration-section'>
           <hr />
           <div>Register</div>
           <div className='registration-form'>
-            <input className='username' onChange={(event) => this.handleRegisterUser(event)} type="text" placeholder="username" />
-            <input className='password' onChange={(event) => this.handleRegisterPassword(event)} type="password" placeholder="password" />
-            <input className='password' onChange={(event) => this.handleRegisterPassword2(event)} type="password" placeholder="password" />
-            <input className='username' onChange={this.handleEmail.bind(this)} type="text" placeholder="email" />
+            <input className='username' onChange={event => this.handleRegisterUser(event)} type="text" placeholder="username" />
+            <input className='password' onChange={event => this.handleRegisterPassword(event)} type="password" placeholder="password" />
+            <input className='password' onChange={event => this.handleRegisterPassword2(event)} type="password" placeholder="password" />
+            <input className='username' onChange={event => this.handleEmail(event)} type="text" placeholder="email" />
             <button className='submit' onClick={() => this.props.signUpUser(this.state)}>submit</button>
           </div>
         </div>
