@@ -26,8 +26,8 @@ const signUpUser = (state) => {
       body: JSON.stringify({ username, password })
     })
       .then(response => response.json())
-      .then(dispatch({ type: TYPES.SIGNUP_SUCCESS }))
-      .catch(err => dispatch(authError(TYPES.SIGNUP_ERROR, 'Invalid username or password')));
+      .then(response => response.username ? dispatch({ type: TYPES.SIGNUP_SUCCESS }) : null)
+      .catch(err => dispatch(authError(TYPES.SIGNUP_ERROR, 'Signing up with an invalid username or password')));
   }
 }
 
@@ -43,37 +43,17 @@ const signInUser = (props) => {
       body: JSON.stringify({ username, password })
     })
       .then(response => response.json())
-      .then(dispatch({ type: TYPES.AUTH_USER }))
-      .catch(err => dispatch(authError(TYPES.SIGNIN_ERROR, 'Invalid username or password')));
+      .then(response => response.username ? dispatch({ type: TYPES.AUTH_USER }) : null)
+      .catch(err => dispatch(authError(TYPES.SIGNIN_ERROR, 'Signing in with an invalid username or password')));
   }
 }
 
 /**
  * Sign out user
  */
-const singOutUser = () => {
+const signOutUser = () => {
   return {
     type: TYPES.UNAUTH_USER
-  }
-}
-
-
-
-
-
-
-/**
- * Test functions - to be deleted
- */
-const increasePortfolioCounter = () => {
-  return {
-    type: TYPES.INCREASE_PORTFOLIO_COUNTER
-  }
-}
-
-const decreasePortfolioCounter = () => {
-  return {
-    type: TYPES.DECREASE_PORTFOLIO_COUNTER
   }
 }
 
@@ -81,7 +61,5 @@ module.exports = {
   authError,
   signUpUser,
   signInUser,
-  singOutUser,
-  increasePortfolioCounter,
-  decreasePortfolioCounter
+  signOutUser
 }

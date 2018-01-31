@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import { Route, Redirect } from 'react-router'
 import { render } from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -30,12 +31,6 @@ export class Login extends Component {
       registerPassword2: '',
       email: '',
     };
-    this.handleUser = this.handleUser.bind(this);
-    this.handlePassword = this.handlePassword.bind(this);
-    this.handleRegisterUser = this.handleRegisterUser.bind(this);
-    this.handleRegisterPassword = this.handleRegisterPassword.bind(this);
-    this.handleRegisterPassword2 = this.handleRegisterPassword2.bind(this);
-    this.handleEmail = this.handleEmail.bind(this);
   }
 
   handleUser(event) {
@@ -67,34 +62,46 @@ export class Login extends Component {
   }
 
   render() {
-    console.log(this.state.username);
-    console.log(this.state.password);
+    console.log(`this.props.authenticated: ${this.props.authenticated}`);
     return (
-      <div className='login-page'>
-        <div id='title'>
-          cryptography
-        </div>
-        <div id='description'>
-          track your cryptocurrency portfolio in one place
-        </div>
-        <div className='login'>
-          <input className='username' onChange={event => this.handleUser(event)} type="text" placeholder="username" />
-          <input className='password' onChange={event => this.handlePassword(event)} type="password" placeholder="password" />
-          <button className='submit' onClick={() => this.props.signInUser(this.state)}>submit</button>
-          {/* <Link to='/portfolio' id='forgot' >forgot password?</Link> */}
-        </div>
-        <div id='registration-section'>
-          <hr />
-          <div>Register</div>
-          <div className='registration-form'>
-            <input className='username' onChange={event => this.handleRegisterUser(event)} type="text" placeholder="username" />
-            <input className='password' onChange={event => this.handleRegisterPassword(event)} type="password" placeholder="password" />
-            <input className='password' onChange={event => this.handleRegisterPassword2(event)} type="password" placeholder="password" />
-            <input className='username' onChange={event => this.handleEmail(event)} type="text" placeholder="email" />
-            <button className='submit' onClick={() => this.props.signUpUser(this.state)}>submit</button>
-          </div>
-        </div>
-      </div>
+      <Route exact path="/" render={() => (
+        this.props.authenticated ? (
+          <Redirect to="/portfolio" />
+        ) : (
+            <div className='login-page'>
+              <div id='title'>
+                cryptography
+              </div>
+              <div id='description'>
+                track your cryptocurrency portfolio in one place
+              </div>
+              <div className='login'>
+                <input className='username' onChange={event => this.handleUser(event)} type="text" placeholder="username" />
+                <input className='password' onChange={event => this.handlePassword(event)} type="password" placeholder="password" />
+                <button className='submit' onClick={() => this.props.signInUser(this.state)}>submit</button>
+                {
+                  this.props.error.signin &&
+                  <div style={{ color: '#9F2738' }}><em>{this.props.error.signin}</em></div>
+                }
+              </div>
+              <div id='registration-section'>
+                <hr />
+                <div>Register</div>
+                <div className='registration-form'>
+                  <input className='username' onChange={event => this.handleRegisterUser(event)} type="text" placeholder="username" />
+                  <input className='password' onChange={event => this.handleRegisterPassword(event)} type="password" placeholder="password" />
+                  <input className='password' onChange={event => this.handleRegisterPassword2(event)} type="password" placeholder="password" />
+                  <input className='username' onChange={event => this.handleEmail(event)} type="text" placeholder="email" />
+                  <button className='submit' onClick={() => this.props.signUpUser(this.state)}>submit</button>
+                  {
+                    this.props.error.signup &&
+                    <div style={{ color: '#9F2738' }}><em>{this.props.error.signin}</em></div>
+                  }
+                </div>
+              </div>
+            </div>
+          )
+      )} />
     );
   }
 }
