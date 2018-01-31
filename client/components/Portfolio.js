@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { Route, Redirect } from 'react-router'
+import { Redirect } from 'react-router'
 import { render } from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -63,13 +63,13 @@ class Portfolio extends Component {
   }
 
   filterAmount() {
-    
+
   }
-  
+
   filterAlphabetical() {
-    
+
   }
-  
+
   handleCoins() {
     let amountBTC = 0;
     // this logic should be moved to the reducers so that it is accessible elsewhere in the app
@@ -98,27 +98,25 @@ class Portfolio extends Component {
   }
 
   render() {
-    console.log(`this.props.authenticated: ${this.props.authenticated}`);
+    // Redirect to / after logging out
+    // better place to do this?
+    if (!this.props.authenticated) {
+      return <Redirect to="/" />
+    }
     return (
-      <Route exact path='/portfolio' render={() => (
-        !this.props.authenticated ? (
-          <Redirect to='/' />
-        ) : (
-            <div className='portfolio'>
-              <Link to='/'><button id='logout' onClick={() => this.props.signOutUser(this.props)}>Log Out</button></Link>
-              <Link to='/settings' className='header-navigate'>Settings </Link>
-              <span id='refresh'> Refresh </span>
-              <div className='coinsBox'>
-                <div id='coinHeaderBox'>
-                  <div id='total' onClick={this.filterAlphabetical.bind(this)}> Total: {this.state.total} BTC </div>
-                  <div id='header-name'> Name </div>
-                  <div id='header-amount' onClick={this.filterAmount.bind(this)}> Amount </div>
-                </div>
-                {this.handleCoins()}
-              </div>
-            </div>
-          )
-      )} />
+      <div className='portfolio'>
+        <button id='logout' onClick={() => this.props.signOutUser(this.props)}>Log Out</button>
+        <Link to='/settings' className='header-navigate'>Settings </Link>
+        <span id='refresh'> Refresh </span>
+        <div className='coinsBox'>
+          <div id='coinHeaderBox'>
+            <div id='total' onClick={this.filterAlphabetical.bind(this)}> Total: {this.state.total} BTC </div>
+            <div id='header-name'> Name </div>
+            <div id='header-amount' onClick={this.filterAmount.bind(this)}> Amount </div>
+          </div>
+          {this.handleCoins()}
+        </div>
+      </div>
     );
   }
 }
