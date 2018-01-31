@@ -62,13 +62,21 @@ class Portfolio extends Component {
     return 11354
   }
 
+  filterAmount() {
+    
+  }
+  
+  filterAlphabetical() {
+    
+  }
+  
   handleCoins() {
     let amountBTC = 0;
     // this logic should be moved to the reducers so that it is accessible elsewhere in the app
     const coinsDiv = Object.keys(this.state.coins).map((coin, i) => {
       amountBTC = amountBTC + this.state.coins[coin].priceBTC * this.state.coins[coin].amount;
       return (
-        <div className="coinBox" key={i}>
+        <div className='coinBox' key={i}>
           <div className='coinName'>
             {this.state.coins[coin].name}
           </div>
@@ -92,19 +100,19 @@ class Portfolio extends Component {
   render() {
     console.log(`this.props.authenticated: ${this.props.authenticated}`);
     return (
-      <Route exact path="/portfolio" render={() => (
+      <Route exact path='/portfolio' render={() => (
         !this.props.authenticated ? (
-          <Redirect to="/" />
+          <Redirect to='/' />
         ) : (
             <div className='portfolio'>
               <Link to='/'><button id='logout' onClick={() => this.props.signOutUser(this.props)}>Log Out</button></Link>
               <Link to='/settings' className='header-navigate'>Settings </Link>
               <span id='refresh'> Refresh </span>
-              <div className="coinsBox">
-                <div>
-                  <div id='total'> Total: {this.state.total} BTC </div>
-                  <span id='header-name'> Name </span>
-                  <span id='header-amount'> Amount </span>
+              <div className='coinsBox'>
+                <div id='coinHeaderBox'>
+                  <div id='total' onClick={this.filterAlphabetical.bind(this)}> Total: {this.state.total} BTC </div>
+                  <div id='header-name'> Name </div>
+                  <div id='header-amount' onClick={this.filterAmount.bind(this)}> Amount </div>
                 </div>
                 {this.handleCoins()}
               </div>

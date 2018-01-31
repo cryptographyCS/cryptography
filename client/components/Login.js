@@ -63,9 +63,9 @@ export class Login extends Component {
 
   render() {
     return (
-      <Route exact path="/" render={() => (
+      <Route exact path='/' render={() => (
         this.props.authenticated ? (
-          <Redirect to="/portfolio" />
+          <Redirect to='/portfolio' />
         ) : (
             <div className='login-page'>
               <img id='logo' src={require('./../img/coin.png')} alt=''/>
@@ -73,8 +73,8 @@ export class Login extends Component {
                 cryptography
               </div>
               <div className='login'>
-                <input className='username' onChange={event => this.handleUser(event)} type="text" placeholder="username" />
-                <input className='password' onChange={event => this.handlePassword(event)} type="password" placeholder="password" />
+                <input className='username' onChange={event => this.handleUser(event)} type='text' placeholder='username' />
+                <input className='password' onChange={event => this.handlePassword(event)} type='password' placeholder='password' />
                 <button className='submit' onClick={() => this.props.signInUser(this.state)}>log in</button>
                 {
                   this.props.error.signin &&
@@ -82,14 +82,14 @@ export class Login extends Component {
                 }
                 <Link to='/portfolio' id='forgot' >forgot password?</Link>
               </div>
-              <div id="line"> <hr/> </div>
+              <div id='line'> <hr/> </div>
               <div id='registration-section'>
                 <div id='registration-form'>
-                  <div id="registration-text">sign up to track your entire cryptocurrency portfolio in one place</div>
-                  <input className='username' onChange={event => this.handleRegisterUser(event)} type="text"  placeholder="username"/>
-                  <input className='password' onChange={event => this.handleRegisterPassword(event)} type="password"  placeholder="password"/>
-                  <input className='password' onChange={event => this.handleRegisterPassword2(event)} type="password"  placeholder="password"/>
-                  <input className='username' onChange={event => this.handleEmail(event)} type="text"  placeholder="email"/>
+                  <div id='registration-text'>sign up to track your entire cryptocurrency portfolio in one place</div>
+                  <input className='username' onChange={event => this.handleRegisterUser(event)} type='text'  placeholder='username'/>
+                  <input className='password' onChange={event => this.handleRegisterPassword(event)} type='password'  placeholder='password'/>
+                  <input className='password' onChange={event => this.handleRegisterPassword2(event)} type='password'  placeholder='password'/>
+                  <input className='username' onChange={event => this.handleEmail(event)} type='text'  placeholder='email'/>
                   <br></br>
                   <button className='submit-sign-up' onClick={() => this.props.signUpUser(this.state)}>submit</button>
                         {

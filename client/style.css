@@ -168,19 +168,14 @@ input {
 
 #refresh {
   margin-left: 40px;
-}
-
-#total {
-  margin-top: 1em;
-  margin-bottom: .2em;
-  margin-left: .8em;
+  text-decoration: underline;
 }
 
 .coinsBox {
   display:grid;
   grid-template-columns: minmax(200px, 400px);
   grid-row-gap: .5em;
-  grid-auto-rows: minmax(100px, auto);
+  grid-auto-rows: minmax(50px, auto);
   margin-top: 1em;
 }
 
@@ -200,17 +195,34 @@ div.coinsBox > div:nth-of-type(odd) {
   background: #e9f1e5;
 }
 
-div.coinsBox > div:first-child {
-  border: 1px solid black;
+#coinHeaderBox {
+  display: grid;
+  border: solid rgba(36, 26, 26, 0.166) 1px;
   background-color: silver;
+  border-radius: 4px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+#total {
+  margin-top: .8em;
+  margin-right: 1.4em;
+  justify-self: end;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  margin-bottom: 1em;
 }
 
 #header-name {
   margin-left: 1em;
+  margin-bottom: .4em;
+  text-decoration: underline;
 }
 
 #header-amount {
-  margin-left: 16em;
+  justify-self: end;
+  margin-right: 1.4em;
+  margin-bottom: .4em;
+  text-decoration: underline;
 }
 
 .coinName {
@@ -234,6 +246,7 @@ div.coinsBox > div:first-child {
 .amountInBTC {
   justify-self: end;
   margin-right: 1.4em;
+  margin-bottom: 1.4em;
 }
 
 
