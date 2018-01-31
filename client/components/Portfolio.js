@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Route, Redirect } from 'react-router';
+import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router'
 import { render } from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -65,9 +65,7 @@ class Portfolio extends Component {
   }
 
   filterAmount() {
-    console.log('SORTED',this.state.sorted);
     if (!this.state.sortedNum) {
-      console.log('SORTED1')
       this.setState((prevState) => {
         const coinsSorted = prevState.coins.sort((a, b) => {
           const sortedInt =  (a.priceBTC * a.amount) - (b.priceBTC * b.amount);
@@ -76,7 +74,6 @@ class Portfolio extends Component {
         return { coins: coinsSorted, sortedNum: !prevState.sortedNum };
       });
     } else {
-      console.log('SORTED2')
       this.setState((prevState) => {
         const coinsSorted = prevState.coins.sort((a, b) => {
           const sortedInt = (b.priceBTC * b.amount) - (a.priceBTC * a.amount);
@@ -141,26 +138,25 @@ class Portfolio extends Component {
   }
 
   render() {
+    // Redirect to / after logging out
+    // better place to do this?
+    if (!this.props.authenticated) {
+      return <Redirect to="/" />
+    }
     return (
-      <Route exact path='/portfolio' render={() => (
-        !this.props.authenticated ? (
-          <Redirect to='/' />
-        ) : (
-            <div className='portfolio'>
-              <Link to='/'><button id='logout' onClick={() => this.props.signOutUser(this.props)}>Log Out</button></Link>
-              <Link to='/settings' className='header-navigate'>Settings </Link>
-              <span id='refresh'> Refresh </span>
-              <div className='coinsBox'>
-                <div id='coinHeaderBox'>
-                  <div id='total'> Total: {this.state.total} BTC </div>
-                  <div id='header-name' onClick={this.filterAlphabetical.bind(this)}> Name </div>
-                  <div id='header-amount' onClick={this.filterAmount.bind(this)}> Amount </div>
-                </div>
-                {this.handleCoins()}
-              </div>
-            </div>
-          )
-      )} />
+      <div className='portfolio'>
+        <button id='logout' onClick={() => this.props.signOutUser(this.props)}>Log Out</button>
+        <Link to='/settings' className='header-navigate'>Settings </Link>
+        <span id='refresh'> Refresh </span>
+        <div className='coinsBox'>
+          <div id='coinHeaderBox'>
+            <div id='total' Total: {this.state.total}> BTC </div>
+            <div id='header-name' onClick={this.filterAlphabetical.bind(this)}> Name </div>
+            <div id='header-amount' onClick={this.filterAmount.bind(this)}> Amount </div>
+          </div>
+          {this.handleCoins()}
+        </div>
+      </div>
     );
   }
 }
