@@ -5,6 +5,10 @@ import { render } from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+
+// Application Components
+import Registration from './Registration';
+
 /*eslint-disable*/
 const mapStateToProps = store => ({
   authenticated: store.user.authenticated,
@@ -25,11 +29,7 @@ export class Login extends Component {
     super(props);
     this.state = {
       username: '',
-      password: '',
-      registerUser: '',
-      registerPassword: '',
-      registerPassword2: '',
-      email: '',
+      password: ''
     };
   }
 
@@ -41,25 +41,6 @@ export class Login extends Component {
     this.setState({ password: event.target.value });
   }
 
-  handleRegisterUser(event) {
-    this.setState({ registerUser: event.target.value });
-  }
-
-  handleRegisterPassword(event) {
-    this.setState({ registerPassword: event.target.value });
-  }
-
-  handleRegisterPassword2(event) {
-    this.setState({ registerPassword2: event.target.value });
-  }
-
-  handleEmail(event) {
-    this.setState({ email: event.target.value });
-  }
-
-  submitForm(event) {
-    event.preventDeault();
-  }
 
   render() {
     console.log(`this.props.authenticated: ${this.props.authenticated}`);
@@ -87,17 +68,7 @@ export class Login extends Component {
               <div id='registration-section'>
                 <hr />
                 <div>Register</div>
-                <div className='registration-form'>
-                  <input className='username' onChange={event => this.handleRegisterUser(event)} type="text" placeholder="username" />
-                  <input className='password' onChange={event => this.handleRegisterPassword(event)} type="password" placeholder="password" />
-                  <input className='password' onChange={event => this.handleRegisterPassword2(event)} type="password" placeholder="password" />
-                  <input className='username' onChange={event => this.handleEmail(event)} type="text" placeholder="email" />
-                  <button className='submit' onClick={() => this.props.signUpUser(this.state)}>submit</button>
-                  {
-                    this.props.error.signup &&
-                    <div style={{ color: '#9F2738' }}><em>{this.props.error.signin}</em></div>
-                  }
-                </div>
+                <Registration signUpUser={this.props.signUpUser} signIn={this.props.signIn} error={this.props.error} />
               </div>
             </div>
           )

@@ -14,20 +14,16 @@ const authError = (TYPE, error) => {
  * Sign up user
  */
 const signUpUser = (state) => {
-  const { registerUser, registerPassword2 } = state;
-  const username = registerUser;
-  const password = registerPassword2;
-  console.log(`username: ${username}`);
-  console.log(`password: ${password}`);
+  const { username, password, email } = state;
   return function (dispatch) {
-    fetch('/api/signup', {
+    return fetch('/api/signup', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ username, password, email })
     })
       .then(response => response.json())
       .then(response => response.username ? dispatch({ type: TYPES.SIGNUP_SUCCESS }) : null)
-      .catch(err => dispatch(authError(TYPES.SIGNUP_ERROR, 'Signing up with an invalid username or password')));
+      .catch(err => dispatch(authError(TYPES.SIGNUP_ERROR, 'Registration server error')));
   }
 }
 
