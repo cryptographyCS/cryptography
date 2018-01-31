@@ -1,10 +1,18 @@
 /* Application */
+@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700');
+@import url('https://fonts.googleapis.com/css?family=Supermercado+One');
+
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Lato', sans-serif;
   background-color: rgb(241, 245, 244);
 }
 
 /* Login */
+
+#logo {
+  margin-top: 5vw;
+  width: 75px;
+}
 
 .login-page {
   text-align: center;
@@ -18,9 +26,9 @@ body {
 }
 
 #title {
-  margin-top: 10vw;
   font-size: 3em;
   text-align: center;
+  font-family: 'Supermercado One', cursive;
 }
 
 #description {
@@ -154,9 +162,12 @@ input {
   outline: 0;
 }
 
-.right-head {
-  position: absolute;
+.header-navigate {
   margin-left: 50px;
+}
+
+#refresh {
+  margin-left: 40px;
 }
 
 #total {
@@ -187,6 +198,19 @@ div.coinsBox > div:nth-of-type(odd) {
 
 div.coinsBox > div:nth-of-type(odd) {
   background: #e9f1e5;
+}
+
+div.coinsBox > div:first-child {
+  border: 1px solid black;
+  background-color: silver;
+}
+
+#header-name {
+  margin-left: 1em;
+}
+
+#header-amount {
+  margin-left: 16em;
 }
 
 .coinName {

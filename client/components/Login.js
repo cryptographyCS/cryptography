@@ -60,8 +60,9 @@ export class Login extends Component {
 
   render() {
     console.log(this.props);
-    return (
+    return ( 
       <div className='login-page'>
+        <img id='logo' src={require('./../img/coin.png')} alt=''/>
         <div id='title'>
           cryptography
         </div>

@@ -6,7 +6,7 @@ class Settings extends Component {
     return (
       <div>
         <Link to='/'><button id='logout'>Log Out</button></Link>
-        <Link className='right-head' to='/portfolio'>Portfolio</Link>
+        <Link className='header-navigate' to='/portfolio'>Portfolio</Link>
         <div id="settings-intro">
           <p> Cryptography creates an aggregate view of your cryptocurrency portfolio.</p>
           <p>  To include coins from an exchange, click the exchange to authorize Cryptography.</p> <p> Cryptography has only read-access to your account; it cannot make buys or sells on your behalf. </p>

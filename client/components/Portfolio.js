@@ -93,9 +93,14 @@ class Portfolio extends Component {
     return (
       <div className='portfolio'>
         <Link to='/'><button id='logout'>Log Out</button></Link>
-        <Link className='right-head' to='/settings'>Settings </Link>
-        <div id='total'> Total: {this.state.total} BTC </div>
+        <Link to='/settings' class='header-navigate'>Settings </Link>
+        <span id='refresh'> Refresh </span>
         <div className="coinsBox">
+          <div>
+            <div id='total'> Total: {this.state.total} BTC </div>
+            <span id='header-name'> Name </span>
+            <span id='header-amount'> Amount </span>
+          </div>
           {this.handleCoins()}
         </div>
       </div>
