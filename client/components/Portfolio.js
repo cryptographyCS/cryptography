@@ -98,7 +98,7 @@ class Portfolio extends Component {
         ) : (
             <div className='portfolio'>
               <Link to='/'><button id='logout' onClick={() => this.props.signOutUser(this.props)}>Log Out</button></Link>
-              <Link to='/settings' class='header-navigate'>Settings </Link>
+              <Link to='/settings' className='header-navigate'>Settings </Link>
               <span id='refresh'> Refresh </span>
               <div className="coinsBox">
                 <div>
