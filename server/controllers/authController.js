@@ -15,7 +15,7 @@ authController.signup = (req, res, next) => {
       res.locals.result = result.rows[0];
       next();
     }
-  ).catch(err => console.error('Error creating user', err.stack));
+  ).catch(err => res.status(401).end(err));
 };
 
 authController.getUser = (req, res, next) => {
