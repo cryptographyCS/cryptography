@@ -7,7 +7,11 @@ const DATABASE = process.env.DB_USER; // DB name is the same as the username by 
 const PORT = 5432;
 
 const pool = new Pool({
-  host: `postgres://${USER}:${PASS}@baasu.db.elephantsql.com:${PORT}/${DATABASE}`,
+  user: USER,
+  database: DATABASE,
+  password: PASS,
+  host: 'baasu.db.elephantsql.com',
+  port: PORT,
   max: 20,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,
