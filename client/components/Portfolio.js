@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import { Route, Redirect } from 'react-router'
 import { render } from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 /*eslint-disable*/
 const mapStateToProps = store => ({
-  portfolioCounter: store.portfolio.portfolioCounter
+  authenticated: store.user.authenticated,
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    increasePortfolioCounter: actions.increasePortfolioCounter,
-    decreasePortfolioCounter: actions.decreasePortfolioCounter,
+    signOutUser: actions.signOutUser,
   }, dispatch)
 };
 
@@ -85,25 +85,32 @@ class Portfolio extends Component {
       )
     })
     // could be added to componentDidUpdate
-    if (this.state.total === 0) this.setState({total: amountBTC.toFixed(5)});
+    if (this.state.total === 0) this.setState({ total: amountBTC.toFixed(5) });
     return coinsDiv;
   }
 
   render() {
+    console.log(`this.props.authenticated: ${this.props.authenticated}`);
     return (
-      <div className='portfolio'>
-        <Link to='/'><button id='logout'>Log Out</button></Link>
-        <Link to='/settings' class='header-navigate'>Settings </Link>
-        <span id='refresh'> Refresh </span>
-        <div className="coinsBox">
-          <div>
-            <div id='total'> Total: {this.state.total} BTC </div>
-            <span id='header-name'> Name </span>
-            <span id='header-amount'> Amount </span>
-          </div>
-          {this.handleCoins()}
-        </div>
-      </div>
+      <Route exact path="/portfolio" render={() => (
+        !this.props.authenticated ? (
+          <Redirect to="/" />
+        ) : (
+            <div className='portfolio'>
+              <Link to='/'><button id='logout' onClick={() => this.props.signOutUser(this.props)}>Log Out</button></Link>
+              <Link to='/settings' class='header-navigate'>Settings </Link>
+              <span id='refresh'> Refresh </span>
+              <div className="coinsBox">
+                <div>
+                  <div id='total'> Total: {this.state.total} BTC </div>
+                  <span id='header-name'> Name </span>
+                  <span id='header-amount'> Amount </span>
+                </div>
+                {this.handleCoins()}
+              </div>
+            </div>
+          )
+      )} />
     );
   }
 }

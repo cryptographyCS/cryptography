@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import { Route, Redirect } from 'react-router'
 import { render } from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -7,12 +8,14 @@ import * as actions from '../actions';
 /*eslint-disable*/
 const mapStateToProps = store => ({
   authenticated: store.user.authenticated,
+  signup: store.user.signup,
   error: store.user.error
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     signInUser: actions.signInUser,
+    signUpUser: actions.signUpUser,
   }, dispatch)
 };
 
@@ -21,7 +24,7 @@ export class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: '',
+      username: '',
       password: '',
       registerUser: '',
       registerPassword: '',
@@ -30,65 +33,75 @@ export class Login extends Component {
     };
   }
 
-  handleUser() {
-    this.setState({ user: event.target.value });
+  handleUser(event) {
+    this.setState({ username: event.target.value });
   }
 
-  handlePassword() {
+  handlePassword(event) {
     this.setState({ password: event.target.value });
   }
-  
-  handleRegisterUser() {
+
+  handleRegisterUser(event) {
     this.setState({ registerUser: event.target.value });
   }
-  
-  handleRegisterPassword() {
+
+  handleRegisterPassword(event) {
     this.setState({ registerPassword: event.target.value });
   }
-  
-  handleRegisterPassword2() {
+
+  handleRegisterPassword2(event) {
     this.setState({ registerPassword2: event.target.value });
   }
-  
-  handleEmail() {
+
+  handleEmail(event) {
     this.setState({ email: event.target.value });
   }
-  
+
   submitForm(event) {
     event.preventDeault();
   }
 
   render() {
-    console.log(this.props);
-    return ( 
-      <div className='login-page'>
-        <img id='logo' src={require('./../img/coin.png')} alt=''/>
-        <div id='title'>
-          cryptography
-        </div>
-        {/* <div id='description'>
-          track your cryptocurrency portfolio in one place
-        </div> */}
-        <form className='login' onSubmit={this.submitForm}>
-          <input className='username' value={this.state.user} onChange={this.handleUser.bind(this)} type="text"  placeholder="username"/>
-          <input className='password' value={this.state.password} onChange={this.handlePassword.bind(this)} type="password"  placeholder="password"/>
-          <br></br>
-          <Link to='/portfolio'><button className='submit' type='submit'>log in</button></Link>
-          <Link to='/portfolio' id='forgot' >forgot password?</Link>
-        </form>
-        <div id="line"> <hr/> </div>
-        <div id='registration-section'>
-          <form id='registration-form' onSubmit={this.submitForm}>
-            <div id="registration-text">sign up to track your entire cryptocurrency portfolio in one place</div>
-            <input className='username' value={this.state.registerUser} onChange={this.handleRegisterUser.bind(this)} type="text"  placeholder="username"/>
-            <input className='password' value={this.state.registerPassword} onChange={this.handleRegisterPassword.bind(this)} type="password"  placeholder="password"/>
-            <input className='password' value={this.state.registerPassword2} onChange={this.handleRegisterPassword2.bind(this)} type="password"  placeholder="password"/>
-            <input className='username' value={this.state.email} onChange={this.handleEmail.bind(this)}type="text"  placeholder="email"/>
-            <br></br>
-            <Link to='/settings'><button className='submit-sign-up' type='submit'>sign up</button></Link>
-          </form>
-        </div>
-      </div>
+    console.log(`this.props.authenticated: ${this.props.authenticated}`);
+    return (
+      <Route exact path="/" render={() => (
+        this.props.authenticated ? (
+          <Redirect to="/portfolio" />
+        ) : (
+            <div>
+              <img id='logo' src={require('./../img/coin.png')} alt=''/>
+              <div id='title'>
+                cryptography
+              </div>
+              <div className='login'>
+                <input className='username' onChange={event => this.handleUser(event)} type="text" placeholder="username" />
+                <input className='password' onChange={event => this.handlePassword(event)} type="password" placeholder="password" />
+                <Link to='/portfolio'><button className='submit' onClick={() => this.props.signInUser(this.state)}>log in</button></Link>
+                {
+                  this.props.error.signin &&
+                  <div style={{ color: '#9F2738' }}><em>{this.props.error.signin}</em></div>
+                }
+                <Link to='/portfolio' id='forgot' >forgot password?</Link>
+              </div>
+              <div id="line"> <hr/> </div>
+              <div id='registration-section'>
+                <form id='registration-form' onSubmit={this.submitForm}>
+                  <div id="registration-text">sign up to track your entire cryptocurrency portfolio in one place</div>
+                  <input className='username' value={this.state.registerUser} onChange={event => this.handleRegisterUser(event)} type="text"  placeholder="username"/>
+                  <input className='password' value={this.state.registerPassword} onChange={event => this.handleRegisterPassword(event)} type="password"  placeholder="password"/>
+                  <input className='password' value={this.state.registerPassword2} onChange={event => this.handleRegisterPassword2(event)} type="password"  placeholder="password"/>
+                  <input className='username' value={this.state.email} onChange={event => this.handleEmail(event)} type="text"  placeholder="email"/>
+                  <br></br>
+                  <Link to='/settings'><button className='submit-sign-up' onClick={() => this.props.signUpUser(this.state)}>submit</button></Link>
+                        {
+                          this.props.error.signup &&
+                          <div style={{ color: '#9F2738' }}><em>{this.props.error.signin}</em></div>
+                        }
+                </form>
+              </div>
+            </div>
+          )
+      )} />
     );
   }
 }
