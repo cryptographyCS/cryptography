@@ -2,7 +2,6 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-require('dotenv').config();
 const bcrypt = require('bcrypt');
 const pg = require('pg');
 const request = require('request');
