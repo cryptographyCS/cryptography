@@ -1,21 +1,30 @@
+require('dotenv').config();
 const db = require('../model');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const SALT_WORK_FACTOR = 10;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const authController = {};
 
 authController.signup = (req, res, next) => {
   const password = bcrypt.hashSync(req.body.password, SALT_WORK_FACTOR);
   const date = new Date().toISOString();
+  
   db.query(
-    'INSERT INTO users (username, password, last_active) VALUES ($1, $2, $3) RETURNING *;',
-    [req.body.username, password, date]
-  ).then(result => { 
+    'INSERT INTO users (username, password, last_active, email) VALUES ($1, $2, $3, $4) RETURNING *;',
+    [req.body.username, password, date, req.body.email]
+  ).then(result => {
+      // const token = jwt.sign({ username: result.rows[0].username }, JWT_SECRET, { algorithm: 'RS256'});
+      
       res.locals.result = result.rows[0];
+      // res.cookie('token', token);
       next();
-    }
-  ).catch(err => res.status(401).end(err));
+    } 
+  ).catch(err => {
+    res.status(401).end('Signup error: ' +  err)
+  });
 };
 
 authController.getUser = (req, res, next) => {
