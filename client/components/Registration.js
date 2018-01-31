@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import { Route, Redirect } from 'react-router'
 
 class Registration extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class Registration extends Component {
     };
     this.onKeyPress = this.onKeyPress.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.renderForm = this.renderForm.bind(this);
   }
 
   /**
@@ -105,7 +107,7 @@ class Registration extends Component {
     });
   }
 
-  render() {
+  renderForm() {
     const { errors } = this.state;
     return (
       <form className="registration-form" onKeyPress={this.onKeyPress}>
@@ -175,6 +177,20 @@ class Registration extends Component {
           <div style={{ color: "#9F2738" }}><em>{this.props.error.signin}</em></div>
         }
       </form>
+    );
+  }
+
+  render() {
+    return (
+      <Route exact path='/' render={() => (
+        this.state.success ? (
+          <Redirect to='/settings' />
+        ) : (
+            <div className='login-page'>
+              {this.renderForm()}
+            </div>
+          )
+      )} />
     );
   }
 }
