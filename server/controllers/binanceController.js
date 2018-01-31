@@ -1,6 +1,5 @@
-const url = require('url');
-const request = require('request');
-const path = require('path');
+// const url = require('url');
+// const path = require('path');
 const bodyParser = require('body-parser');
 const binance = require('node-binance-api');
 
