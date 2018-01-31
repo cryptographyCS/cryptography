@@ -62,41 +62,40 @@ export class Login extends Component {
   }
 
   render() {
-    console.log(`this.props.authenticated: ${this.props.authenticated}`);
     return (
-      <Route exact path="/" render={() => (
+      <Route exact path='/' render={() => (
         this.props.authenticated ? (
-          <Redirect to="/portfolio" />
+          <Redirect to='/portfolio' />
         ) : (
             <div className='login-page'>
+              <img id='logo' src={require('./../img/coin.png')} alt=''/>
               <div id='title'>
                 cryptography
               </div>
-              <div id='description'>
-                track your cryptocurrency portfolio in one place
-              </div>
               <div className='login'>
-                <input className='username' onChange={event => this.handleUser(event)} type="text" placeholder="username" />
-                <input className='password' onChange={event => this.handlePassword(event)} type="password" placeholder="password" />
-                <button className='submit' onClick={() => this.props.signInUser(this.state)}>submit</button>
+                <input className='username' onChange={event => this.handleUser(event)} type='text' placeholder='username' />
+                <input className='password' onChange={event => this.handlePassword(event)} type='password' placeholder='password' />
+                <button className='submit' onClick={() => this.props.signInUser(this.state)}>log in</button>
                 {
                   this.props.error.signin &&
                   <div style={{ color: '#9F2738' }}><em>{this.props.error.signin}</em></div>
                 }
+                <Link to='/portfolio' id='forgot' >forgot password?</Link>
               </div>
+              <div id='line'> <hr/> </div>
               <div id='registration-section'>
-                <hr />
-                <div>Register</div>
-                <div className='registration-form'>
-                  <input className='username' onChange={event => this.handleRegisterUser(event)} type="text" placeholder="username" />
-                  <input className='password' onChange={event => this.handleRegisterPassword(event)} type="password" placeholder="password" />
-                  <input className='password' onChange={event => this.handleRegisterPassword2(event)} type="password" placeholder="password" />
-                  <input className='username' onChange={event => this.handleEmail(event)} type="text" placeholder="email" />
-                  <button className='submit' onClick={() => this.props.signUpUser(this.state)}>submit</button>
-                  {
-                    this.props.error.signup &&
-                    <div style={{ color: '#9F2738' }}><em>{this.props.error.signin}</em></div>
-                  }
+                <div id='registration-form'>
+                  <div id='registration-text'>sign up to track your entire cryptocurrency portfolio in one place</div>
+                  <input className='username' onChange={event => this.handleRegisterUser(event)} type='text'  placeholder='username'/>
+                  <input className='password' onChange={event => this.handleRegisterPassword(event)} type='password'  placeholder='password'/>
+                  <input className='password' onChange={event => this.handleRegisterPassword2(event)} type='password'  placeholder='password'/>
+                  <input className='username' onChange={event => this.handleEmail(event)} type='text'  placeholder='email'/>
+                  <br></br>
+                  <button className='submit-sign-up' onClick={() => this.props.signUpUser(this.state)}>submit</button>
+                        {
+                          this.props.error.signup &&
+                          <div style={{ color: '#9F2738' }}><em>{this.props.error.signin}</em></div>
+                        }
                 </div>
               </div>
             </div>
