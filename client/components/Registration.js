@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { Route, Redirect } from 'react-router'
+import { Redirect } from 'react-router';
 
 class Registration extends Component {
   constructor(props) {
@@ -17,7 +17,6 @@ class Registration extends Component {
     };
     this.onKeyPress = this.onKeyPress.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.renderForm = this.renderForm.bind(this);
   }
 
   /**
@@ -99,6 +98,7 @@ class Registration extends Component {
       this.props.signUpUser(this.state)
         .then(() => {
           this.setState({ loading: false, success: true });
+          this.props.signInUser(this.state)
         })
         .catch((err) => {
           console.log(`Registration error: ${err}`);
@@ -107,8 +107,13 @@ class Registration extends Component {
     });
   }
 
-  renderForm() {
+  render() {
     const { errors } = this.state;
+    // Redirect to /settings after successful registration
+    // better place to do this?
+    if (this.state.success) {
+      return <Redirect to="/settings" />
+    }
     return (
       <form className="registration-form" onKeyPress={this.onKeyPress}>
         <div>
@@ -177,20 +182,6 @@ class Registration extends Component {
           <div style={{ color: "#9F2738" }}><em>{this.props.error.signin}</em></div>
         }
       </form>
-    );
-  }
-
-  render() {
-    return (
-      <Route exact path='/' render={() => (
-        this.state.success ? (
-          <Redirect to='/settings' />
-        ) : (
-            <div className='login-page'>
-              {this.renderForm()}
-            </div>
-          )
-      )} />
     );
   }
 }

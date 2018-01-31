@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { Route, Redirect } from 'react-router'
+import { Redirect } from 'react-router';
 import { render } from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -43,35 +43,39 @@ export class Login extends Component {
 
 
   render() {
+    // Redirect to /portfolio after successful authentication
+    // better place to do this?
+    if (this.props.authenticated) {
+      return <Redirect to="/portfolio" />
+    }
     return (
-      <Route exact path='/' render={() => (
-        this.props.authenticated ? (
-          <Redirect to='/portfolio' />
-        ) : (
-            <div className='login-page'>
-              <img id='logo' src={require('./../img/coin.png')} alt='' />
-              <div id='title'>
-                cryptography
-              </div>
-              <div className='login'>
-                <input className='username' onChange={event => this.handleUser(event)} type='text' placeholder='username' />
-                <input className='password' onChange={event => this.handlePassword(event)} type='password' placeholder='password' />
-                <button className='submit' onClick={() => this.props.signInUser(this.state)}>log in</button>
-                {
-                  this.props.error.signin &&
-                  <div style={{ color: '#9F2738' }}><em>{this.props.error.signin}</em></div>
-                }
-                <Link to='/portfolio' id='forgot' >forgot password?</Link>
-              </div>
-              <div id='line'> <hr /> </div>
-              <div id='registration-section'>
-                <hr />
-                <div>Register</div>
-                <Registration signUpUser={this.props.signUpUser} signIn={this.props.signIn} error={this.props.error} />
-              </div>
-            </div>
-          )
-      )} />
+      <div className='login-page'>
+        <img id='logo' src={require('./../img/coin.png')} alt='' />
+        <div id='title'>
+          cryptography
+        </div>
+        <div className='login'>
+          <input className='username' onChange={event => this.handleUser(event)} type='text' placeholder='username' />
+          <input className='password' onChange={event => this.handlePassword(event)} type='password' placeholder='password' />
+          <button className='submit' onClick={() => this.props.signInUser(this.state)}>log in</button>
+          {
+            this.props.error.signin &&
+            <div style={{ color: '#9F2738' }}><em>{this.props.error.signin}</em></div>
+          }
+          <Link to='/portfolio' id='forgot' >forgot password?</Link>
+        </div>
+        <div id='line'> <hr /> </div>
+        <div id='registration-section'>
+          <hr />
+          <div>Register</div>
+          <Registration
+            signUpUser={this.props.signUpUser}
+            signInUser={this.props.signInUser}
+            signIn={this.props.signIn}
+            error={this.props.error}
+          />
+        </div>
+      </div>
     );
   }
 }
