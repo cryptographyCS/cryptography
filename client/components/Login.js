@@ -43,28 +43,27 @@ export class Login extends Component {
 
 
   render() {
-    console.log(`this.props.authenticated: ${this.props.authenticated}`);
     return (
-      <Route exact path="/" render={() => (
+      <Route exact path='/' render={() => (
         this.props.authenticated ? (
-          <Redirect to="/portfolio" />
+          <Redirect to='/portfolio' />
         ) : (
             <div className='login-page'>
+              <img id='logo' src={require('./../img/coin.png')} alt='' />
               <div id='title'>
                 cryptography
               </div>
-              <div id='description'>
-                track your cryptocurrency portfolio in one place
-              </div>
               <div className='login'>
-                <input className='username' onChange={event => this.handleUser(event)} type="text" placeholder="username" />
-                <input className='password' onChange={event => this.handlePassword(event)} type="password" placeholder="password" />
-                <button className='submit' onClick={() => this.props.signInUser(this.state)}>submit</button>
+                <input className='username' onChange={event => this.handleUser(event)} type='text' placeholder='username' />
+                <input className='password' onChange={event => this.handlePassword(event)} type='password' placeholder='password' />
+                <button className='submit' onClick={() => this.props.signInUser(this.state)}>log in</button>
                 {
                   this.props.error.signin &&
                   <div style={{ color: '#9F2738' }}><em>{this.props.error.signin}</em></div>
                 }
+                <Link to='/portfolio' id='forgot' >forgot password?</Link>
               </div>
+              <div id='line'> <hr /> </div>
               <div id='registration-section'>
                 <hr />
                 <div>Register</div>
