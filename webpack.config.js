@@ -3,17 +3,17 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const VENDOR_LIBS = [
-  'react', 'react-dom'
+  'react', 'react-dom',
 ];
 
 module.exports = {
   entry: {
     bundle: ['babel-polyfill', './client/index.js'],
-    vendor: VENDOR_LIBS
+    vendor: VENDOR_LIBS,
   },
   output: {
     path: path.join(__dirname, 'build'),
-    filename: '[name].[chunkhash].js'
+    filename: '[name].[chunkhash].js',
   },
   devtool: 'source-map',
   module: {
@@ -21,13 +21,17 @@ module.exports = {
       {
         use: 'babel-loader',
         test: /\.js$/,
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         use: ['style-loader', 'css-loader'],
-        test: /\.css$/
-      }
-    ]
+        test: /\.css$/,
+      },
+      {
+        use: 'url-loader?limit=8192',
+        test: /\.(png|jpg|gif)$/,
+      },
+    ],
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
@@ -38,6 +42,6 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-    })
-  ]
+    }),
+  ],
 };
