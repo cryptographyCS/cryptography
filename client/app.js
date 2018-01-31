@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
+import { Switch, Route } from 'react-router-dom';
 import Login from './components/Login';
-// import Portfolio from './components/Portfolio';
+import Portfolio from './components/Portfolio';
+import Settings from './components/Settings';
 import './style.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
-      <div id="app">
-        <Login />
-        {/* <Portfolio /> */}
-      </div>
+      <main>
+        <Switch>
+          <Route exact path='/' component={Login}/>
+          <Route path='/portfolio' component={Portfolio}/>
+          <Route path='/settings' component={Settings}/>
+        </Switch>
+      </main>
     );
   }
 }
