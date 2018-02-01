@@ -59,7 +59,6 @@ const signOutUser = () => {
  * Add an exchange in Settings
  */
 const addExchange = (props) => {
-  console.log(props);
   const { exchange, apiKey, apiSecret } = props;
   return function (dispatch) {
     fetch('/api/addExchange', {
@@ -71,6 +70,21 @@ const addExchange = (props) => {
   };
 };
 
+/**
+ * Get/Refresh coin amounts in Portfolio. NOT currently using this action, but doing it in React instead.
+ */
+const getCoins = (props) => {
+  return function (dispatch) {
+    fetch('/api/update', {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(response => {
+        return {type: TYPE.UPDATE_COINS, payload: response}
+      })
+      .catch(err => console.log('Error fetching coins'));
+  }
+};
 
 module.exports = {
   authError,
@@ -78,4 +92,5 @@ module.exports = {
   signInUser,
   signOutUser,
   addExchange,
+  getCoins,
 }
