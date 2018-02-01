@@ -26,12 +26,9 @@
     "css-loader": "^0.28.9",
     "dotenv": "^5.0.0",
     "express": "^4.16.2",
-<<<<<<< HEAD
     "kraken-api": "^1.0.0",
     "node-binance-api": "^0.4.7",
-=======
     "jsonwebtoken": "^8.1.1",
->>>>>>> 983c5500d0dcf6c0558b2c8c6bcd9121cde04581
     "nodemon": "^1.14.11",
     "pg": "^7.4.1",
     "react": "^16.2.0",

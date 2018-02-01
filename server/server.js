@@ -6,7 +6,8 @@ const cookieParser = require('cookie-parser');
 const cookieController = require('./controllers/cookieController');
 const authController = require('./controllers/authController');
 const apiController = require('./controllers/apiController');
-const binanceController = require('./controllers/binanceController');
+// const binanceController = require('./controllers/binanceController');
+// const krakenController = require('./controllers/krakenController');
 
 const app = express();
 
