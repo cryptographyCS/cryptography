@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { Switch, Route } from 'react-router-dom';
 
 // Application components
-import Login from './components/Login';
+import AuthContainer from './components/Authentication/AuthContainer';
 import Portfolio from './components/Portfolio';
 import Settings from './components/Settings';
 
@@ -16,7 +16,7 @@ class App extends Component {
     return (
       <main>
         <Switch>
-          <Route exact path='/' component={Login} />
+          <Route exact path='/' component={AuthContainer} />
           <Route path='/portfolio' component={Portfolio} />
           <Route path='/settings' component={Settings} />
         </Switch>

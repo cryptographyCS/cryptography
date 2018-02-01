@@ -4,10 +4,14 @@ import { Redirect } from 'react-router';
 import { render } from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actions from '../actions';
+import * as actions from '../../actions';
 
 // Application Components
 import Registration from './Registration';
+import Login from './Login';
+
+// Assets
+const logo = require('./../../img/coin.png');
 
 /*eslint-disable*/
 const mapStateToProps = store => ({
@@ -24,48 +28,25 @@ const mapDispatchToProps = dispatch => {
 };
 
 // export here for testing connected component
-export class Login extends Component {
+export class AuthContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      username: '',
-      password: ''
-    };
   }
-
-  handleUser(event) {
-    this.setState({ username: event.target.value });
-  }
-
-  handlePassword(event) {
-    this.setState({ password: event.target.value });
-  }
-
 
   render() {
-    // Redirect to /portfolio after successful authentication
-    // better place to do this?
-    if (this.props.authenticated) {
-      return <Redirect to="/portfolio" />
-    }
     return (
       <div className='login-page'>
-        <img id='logo' src={require('./../img/coin.png')} alt='' />
+        <img id='logo' src={logo} alt='' />
         <div id='title'>
           cryptography
         </div>
         <div className='login'>
-          <div>
-            <input className='username auth-input' onChange={event => this.handleUser(event)} type='text' placeholder='username' />
-          </div>
-          <div>
-            <input className='password auth-input' onChange={event => this.handlePassword(event)} type='password' placeholder='password' />
-          </div>
-          <button className='submit' onClick={() => this.props.signInUser(this.state)}>log in</button>
-          {
-            this.props.error.signin &&
-            <div style={{ color: '#9F2738', marginBottom: '10px' }}><em>{this.props.error.signin}</em></div>
-          }
+          <Login
+            signInUser={this.props.signInUser}
+            signIn={this.props.signIn}
+            authenticated={this.props.authenticated}
+            error={this.props.error}
+          />
           <Link to='/portfolio' id='forgot' >forgot password?</Link>
         </div>
         <div id='line'> <hr /> </div>
@@ -83,4 +64,4 @@ export class Login extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthContainer);
