@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { Redirect } from 'react-router';
+import classNames from 'classnames';
 
 class Registration extends Component {
   constructor(props) {
@@ -91,7 +92,7 @@ class Registration extends Component {
   /**
    * Sets loading state to true when form is submitted then fires
    * signUpUser action. Once success is returned from server, sets 
-   * loading to false and success to true to hide registration form
+   * loading to false and success to true to redirect to /settings
    */
   onSubmit() {
     this.setState({ loading: true }, () => {
@@ -116,7 +117,7 @@ class Registration extends Component {
     }
     return (
       <form className="registration-form" onKeyPress={this.onKeyPress}>
-        <div>
+        <div className={classNames({ 'has-error': errors.username })}>
           <input
             ref="username"
             className="username auth-input"
@@ -124,11 +125,11 @@ class Registration extends Component {
             placeholder="Username"
             onChange={() => this.handleInputChange('username')}
           ></input>
-          <span>
+          <span className={classNames('has-error', { 'show': errors.username })}>
             {errors.username}
           </span>
         </div>
-        <div>
+        <div className={classNames({ 'has-error': errors.password })}>
           <input
             ref="password"
             className="password auth-input"
@@ -136,11 +137,11 @@ class Registration extends Component {
             placeholder="Password"
             onChange={() => this.handleInputChange('password')}
           ></input>
-          <span>
+          <span className={classNames('has-error', { 'show': errors.password })}>
             {errors.password}
           </span>
         </div>
-        <div>
+        <div className={classNames({ 'has-error': errors.passwordMatch })}>
           <input
             ref="passwordMatch"
             className="password auth-input"
@@ -148,14 +149,14 @@ class Registration extends Component {
             placeholder="Confirm Password"
             onChange={() => this.handleInputChange('passwordMatch')}
           ></input>
-          <span>
+          <span className={classNames('has-error', { 'show': errors.passwordMatch })}>
             {errors.passwordMatch}
           </span>
-          <span>
+          <span className={classNames('has-error', { 'show': errors.invalidPasswordMatch })}>
             {errors.invalidPasswordMatch}
           </span>
         </div>
-        <div>
+        <div className={classNames({ 'has-error': errors.email })}>
           <input
             ref="email"
             className="email auth-input"
@@ -163,7 +164,7 @@ class Registration extends Component {
             placeholder="Email Address"
             onChange={() => this.handleInputChange('email')}
           ></input>
-          <span>
+          <span className={classNames('has-error', { 'show': errors.email })}>
             {errors.email}
           </span>
         </div>
@@ -179,7 +180,7 @@ class Registration extends Component {
         </div>
         {
           this.props.error.signup &&
-          <div style={{ color: "#9F2738" }}><em>{this.props.error.signin}</em></div>
+          <div style={{ color: "#9F2738" }}><em>{this.props.error.signup}</em></div>
         }
       </form>
     );

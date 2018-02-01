@@ -9,6 +9,10 @@ body {
 }
 
 /* Utility */
+.show {
+  display: block;
+}
+
 .hide {
   display: none;
 }
@@ -50,7 +54,7 @@ body {
   margin-top: 10px;
   padding: 5px;
   font-size: .8em;
-  margin-right: 1vw;
+  border: 1px solid #dfdfdf;
   border-radius: 2px;
 }
 
@@ -131,6 +135,20 @@ input:focus {
   font-size: .5em;
   display: block;
   text-decoration: none;
+}
+
+/* Form error handling */
+.help-block {
+  display: block;
+}
+
+.has-error {
+  display: block;
+  color: #9F2738;
+}
+
+.has-error > input {
+  border: 1px solid #9F2738;
 }
 
 /* Portfolio */
