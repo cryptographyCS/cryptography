@@ -9,14 +9,15 @@ import * as actions from '../actions';
 
 const mapStateToProps = store => ({
   authenticated: store.user.authenticated,
+  // coins: store.portfolio.coins,
 });
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     signOutUser: actions.signOutUser,
+    // getCoins: actions.getCoins,
   }, dispatch)
 };
-
 
 class Portfolio extends Component {
   constructor(props) {
@@ -26,42 +27,24 @@ class Portfolio extends Component {
       total: 0,
       sortedNum: false,
       sortName: false,
-      coins: [
-        {
-          name: 'Ethereum',
-          amount: 6.5,
-          priceBTC: 0.10586500,
-          ticker: 'ETC',
-        },
-        {
-          name: 'Bitcoin',
-          amount: 3.2,
-          priceBTC: 1,
-          ticker: 'BTC',
-        },
-        {
-          name: 'Litecoin',
-          amount: 12.4,
-          priceBTC: 0.01626100,
-          ticker: 'LTC',
-        },
-        {
-          name: 'Ripple',
-          amount: 4795,
-          priceBTC: 0.00011842,
-          ticker: 'XRP',
-        },
-        {
-          name: 'Walton',
-          amount: 50000,
-          priceBTC: 0.00343169,
-          ticker: 'WTC',
-        }
-      ]
+      coins: [],
+    }
+  }
+  
+  componentDidUpdate() {
+    if(this.state.coins.length === 0) {
+      console.log('fetching')
+      fetch('/api/update', {
+        method: 'GET',
+      })
+        .then(response => response.json())
+        .then(response => this.setState({coins: response}))
+        .catch(err => console.log('Error fetching coins'));
     }
   }
 
   getBTCInDollars() {
+    // need to fetch the price
     return 11354
   }
 
