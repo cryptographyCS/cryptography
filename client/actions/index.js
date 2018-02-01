@@ -71,6 +71,7 @@ const addExchange = (props) => {
       headers: { 'Content-type': 'application/json' },
       credentials: 'include',
       body: JSON.stringify({ exchange, apiKey, apiSecret }),
+      credentials: 'include',
     })
       .catch(err => console.log('Error adding exchange', err));
   };
