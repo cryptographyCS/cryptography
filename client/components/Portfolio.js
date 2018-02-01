@@ -31,16 +31,18 @@ class Portfolio extends Component {
     }
   }
   
+  updateCoins() {
+    console.log('fetching')
+    fetch('/api/update', {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(response => this.setState({coins: response}))
+      .catch(err => console.log('Error fetching coins'));
+  } 
+  
   componentDidUpdate() {
-    if(this.state.coins.length === 0) {
-      console.log('fetching')
-      fetch('/api/update', {
-        method: 'GET',
-      })
-        .then(response => response.json())
-        .then(response => this.setState({coins: response}))
-        .catch(err => console.log('Error fetching coins'));
-    }
+    if (this.state.coins.length === 0) this.updateCoins();
   }
 
   getBTCInDollars() {
@@ -128,10 +130,10 @@ class Portfolio extends Component {
       return <Redirect to="/" />
     }
     return (
-      <div className='portfolio'>
+      <div className='app'>
         <button id='logout' onClick={() => this.props.signOutUser(this.props)}>Log Out</button>
         <Link to='/settings' className='header-navigate'>Settings </Link>
-        <span id='refresh'> Refresh </span>
+        <span id='refresh' onClick={this.updateCoins.bind(this)}> Refresh </span>
         <div className='coinsBox'>
           <div id='coinHeaderBox'>
             <div id='total'> Total: {this.state.total} BTC </div>
