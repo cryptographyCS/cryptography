@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-import { Redirect } from 'react-router'
+import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import { render } from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 /*eslint-disable*/
+
 const mapStateToProps = store => ({
   authenticated: store.user.authenticated,
 });
@@ -150,7 +151,7 @@ class Portfolio extends Component {
         <span id='refresh'> Refresh </span>
         <div className='coinsBox'>
           <div id='coinHeaderBox'>
-            <div id='total' Total: {this.state.total}> BTC </div>
+            <div id='total'> Total: {this.state.total}> BTC </div>
             <div id='header-name' onClick={this.filterAlphabetical.bind(this)}> Name </div>
             <div id='header-amount' onClick={this.filterAmount.bind(this)}> Amount </div>
           </div>
