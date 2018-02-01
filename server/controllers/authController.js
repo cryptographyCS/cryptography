@@ -16,10 +16,9 @@ authController.signup = (req, res, next) => {
     'INSERT INTO users (username, password, last_active, email) VALUES ($1, $2, $3, $4) RETURNING *;',
     [req.body.username, password, date, req.body.email]
   ).then(result => {
-      // const token = jwt.sign({ username: result.rows[0].username }, JWT_SECRET, { algorithm: 'RS256'});
-      
+      const token = jwt.sign({ username: result.rows[0].username }, JWT_SECRET, { algorithm: 'HS256'});
       res.locals.result = result.rows[0];
-      // res.cookie('token', token);
+      res.cookie('token', token);
       next();
     } 
   ).catch(err => {
@@ -33,7 +32,9 @@ authController.getUser = (req, res, next) => {
     [req.body.username]
   )
   .then(result => {
+    const token = jwt.sign({ username: result.rows[0].username }, JWT_SECRET, { algorithm: 'HS256'});
     res.locals.result = result.rows[0];
+    res.cookie('token', token);
     next();
   })
   .catch(err => console.error('Error getting user:', err));

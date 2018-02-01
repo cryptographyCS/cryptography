@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const pg = require('pg');
 const request = require('request');
 
-
+const cookieController = require('./controllers/cookieController');
 const authController = require('./controllers/authController');
 const apiController = require('./controllers/apiController');
 
@@ -16,7 +16,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+// app.get('/', authController.checkCookie, express.static(path.resolve(__dirname, '../build')));
+
 app.use(express.static(path.resolve(__dirname, '../build')));
+app.use(cookieController.checkForCookie);
 
 app.post('/api/login',
   authController.getUser,
