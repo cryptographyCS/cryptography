@@ -70,6 +70,7 @@ const addExchange = (props) => {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({ exchange, apiKey, apiSecret }),
+      credentials: 'include',
     })
       .catch(err => console.log('Error adding exchange', err));
   };
@@ -82,6 +83,7 @@ const getCoins = (props) => {
   return function (dispatch) {
     fetch('/api/update', {
       method: 'GET',
+      credentials: 'include',
     })
       .then(response => response.json())
       .then(response => {
