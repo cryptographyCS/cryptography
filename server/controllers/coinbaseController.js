@@ -43,9 +43,7 @@ const coinbase_getToken = (req, res, next) => {
     if (!error && response.statusCode == 200) {
       body = JSON.parse(body);
 
-      //store tokens in Database
-
-      //pass tokens to cookies??
+      //store tokens in Database!!!!!
 
       //body.access_token
       //body.refresh_token
@@ -59,27 +57,26 @@ const coinbase_getToken = (req, res, next) => {
         });
       });
 
-
       // make API call for getUser once token is acquired
-      request('https://api.coinbase.com/v2/user', {
-        'headers': { 'Authorization': `Bearer ${body.access_token}`,
-          'CB-VERSION': process.env.COINBASE_VERSION,
-          'content-type': 'application/JSON'}
-        }, (error, response, body) => {
-            if (!error && response.statusCode == 200) {
-
-              // body is user profile data with ID
-              body = JSON.parse(body);
-              // console.log('body is: ', body);
-
-              //using coinbase API - getUser
-              // client.getUser(body.data.id, (err, user) => {
-              //   console.log('user is: ', user);
-              // });
-
-            }
-            else console.log('error', response.statusCode, body);
-          })
+      // request('https://api.coinbase.com/v2/user', {
+      //   'headers': { 'Authorization': `Bearer ${body.access_token}`,
+      //     'CB-VERSION': process.env.COINBASE_VERSION,
+      //     'content-type': 'application/JSON'}
+      //   }, (error, response, body) => {
+      //       if (!error && response.statusCode == 200) {
+      //
+      //         // body is user profile data with ID
+      //         body = JSON.parse(body);
+      //         // console.log('body is: ', body);
+      //
+      //         //using coinbase API - getUser
+      //         // client.getUser(body.data.id, (err, user) => {
+      //         //   console.log('user is: ', user);
+      //         // });
+      //
+      //       }
+      //       else console.log('error', response.statusCode, body);
+      //     })
 
 
     }
@@ -88,6 +85,16 @@ const coinbase_getToken = (req, res, next) => {
   next();
   // reroute with router
   // res.redirect(path.resolve(__dirname, '../', '../', 'build', 'index.html'));
+}
+
+const coinbase_read = (req, res) => {
+  //body.access_token and body.refresh_token should come from the database
+  const client = new Client({'accessToken': body.access_token, 'refreshToken': body.refresh_token});
+  client.getAccounts({}, function(err, accounts) {
+    accounts.forEach(account => {
+      console.log('bal: ' + account.balance.amount + ' currency: ' + account.balance.currency);
+    });
+  });
 }
 
 
