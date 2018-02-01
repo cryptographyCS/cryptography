@@ -2,9 +2,6 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const bcrypt = require('bcrypt');
-const pg = require('pg');
-const request = require('request');
 
 const cookieController = require('./controllers/cookieController');
 const authController = require('./controllers/authController');
@@ -16,20 +13,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-// app.get('/', authController.checkCookie, express.static(path.resolve(__dirname, '../build')));
-
 app.use(express.static(path.resolve(__dirname, '../build')));
 app.use(cookieController.checkForCookie);
 
 app.post('/api/login',
   authController.getUser,
   authController.validateUser,
+  cookieController.addCookie,
   (req, res) => {
     res.json(res.locals.result);
   });
 
 app.post('/api/signup',
   authController.signup,
+  cookieController.addCookie,
   (req, res) => {
     res.json(res.locals.result);
   });
