@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const cookieController = require('./controllers/cookieController');
 const authController = require('./controllers/authController');
 const apiController = require('./controllers/apiController');
+const exchangeController = require('./controllers/exchangeController');
 // const binanceController = require('./controllers/binanceController');
 // const krakenController = require('./controllers/krakenController');
 
@@ -33,14 +34,14 @@ app.post('/api/signup',
     res.json(res.locals.result);
 });
 
-app.get('/api/logout', 
-  cookieController.clearCookie, 
+app.get('/api/logout',
+  cookieController.clearCookie,
   (req, res) => {
     res.end();
 });
 
-app.get('/api/update')
-app.post('/api/addExchange')
+app.get('/api/update', exchangeController.);
+app.post('/api/addExchange', exchangeController.addExchange);
 
 // route for coinbase OAuth
 app.get('/coinbase/auth', (req, res) => {
