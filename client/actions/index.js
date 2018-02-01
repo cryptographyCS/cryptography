@@ -34,7 +34,7 @@ const signUpUser = (state) => {
 const signInUser = (props) => {
   const { username, password } = props;
   return function (dispatch) {
-    fetch('/api/login', {
+    return fetch('/api/login', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
       credentials: 'include',
@@ -69,6 +69,7 @@ const addExchange = (props) => {
     fetch('/api/addExchange', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({ exchange, apiKey, apiSecret }),
       credentials: 'include',
     })
@@ -83,11 +84,12 @@ const getCoins = (props) => {
   return function (dispatch) {
     fetch('/api/update', {
       method: 'GET',
+      headers: { 'Content-type': 'application/json' },
       credentials: 'include',
     })
       .then(response => response.json())
       .then(response => {
-        return {type: TYPE.UPDATE_COINS, payload: response}
+        return { type: TYPE.UPDATE_COINS, payload: response }
       })
       .catch(err => console.log('Error fetching coins'));
   }

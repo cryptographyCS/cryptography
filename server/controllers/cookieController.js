@@ -7,10 +7,12 @@ const cookieController = {};
 
 cookieController.checkForCookie = (req, res, next) => {
   if (req.cookies.token) {
-    console.log('COOKIE FOUND')
+    console.log('COOKIE FOUND');
     const decoded = jwt.verify(req.cookies.token, JWT_SECRET);
     res.locals.sessionUser = decoded.username;
+    console.log(res.locals.sessionUser);
   }
+  // else console.log('no cookie found');
   next();
 };
 
