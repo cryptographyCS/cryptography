@@ -119,16 +119,16 @@ class Portfolio extends Component {
       return (
         <div className='coinBox' key={i}>
           <div className='coinName'>
-            {coin.name}
+            {coin.name.toLocaleString()}
           </div>
           <div className='amount'>
-            {coin.amount}
+            {coin.amount.toLocaleString()}
           </div>
           <div className='ticker'>
-            {coin.ticker}
+            {coin.ticker.toLocaleString()}
           </div>
           <div className='amountInBTC'>
-            {(coin.priceBTC * coin.amount).toFixed(5)} BTC
+            {(coin.priceBTC * coin.amount).toFixed(5).toLocaleString()} BTC
           </div>
         </div>
       )
@@ -151,7 +151,7 @@ class Portfolio extends Component {
         <span id='refresh'> Refresh </span>
         <div className='coinsBox'>
           <div id='coinHeaderBox'>
-            <div id='total'> Total: {this.state.total}> BTC </div>
+            <div id='total'> Total: {this.state.total} BTC </div>
             <div id='header-name' onClick={this.filterAlphabetical.bind(this)}> Name </div>
             <div id='header-amount' onClick={this.filterAmount.bind(this)}> Amount </div>
           </div>
