@@ -33,7 +33,7 @@ class Portfolio extends Component {
           priceBTC: 0.10586500,
           ticker: 'ETC',
         },
-       {
+        {
           name: 'Bitcoin',
           amount: 3.2,
           priceBTC: 1,
@@ -69,7 +69,7 @@ class Portfolio extends Component {
     if (!this.state.sortedNum) {
       this.setState((prevState) => {
         const coinsSorted = prevState.coins.sort((a, b) => {
-          const sortedInt =  (a.priceBTC * a.amount) - (b.priceBTC * b.amount);
+          const sortedInt = (a.priceBTC * a.amount) - (b.priceBTC * b.amount);
           return sortedInt;
         });
         return { coins: coinsSorted, sortedNum: !prevState.sortedNum };

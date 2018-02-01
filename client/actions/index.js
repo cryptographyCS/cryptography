@@ -42,7 +42,7 @@ const signInUser = (props) => {
     })
       .then(response => response.json())
       .then(response => response.username ? dispatch({ type: TYPES.AUTH_USER }) : null)
-      .catch(err => dispatch(authError(TYPES.SIGNIN_ERROR, 'Signing in with an invalid username or password')));
+      .catch(err => dispatch(authError(TYPES.SIGNIN_ERROR, 'Authentication server error')));
   }
 }
 
@@ -50,8 +50,13 @@ const signInUser = (props) => {
  * Sign out user
  */
 const signOutUser = () => {
-  return {
-    type: TYPES.UNAUTH_USER
+  return function (dispatch) {
+    fetch('/api/logout', {
+      method: 'GET',
+      headers: { 'Content-type': 'application/json' },
+      credentials: 'include',
+    })
+      .then(dispatch({ type: TYPES.UNAUTH_USER }))
   }
 }
 
