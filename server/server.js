@@ -22,20 +22,19 @@ app.post('/api/login',
   cookieController.addCookie,
   (req, res) => {
     res.json(res.locals.result);
-});
+  });
 
 app.post('/api/signup',
   authController.signup,
-  cookieController.addCookie,
   (req, res) => {
     res.json(res.locals.result);
-});
+  });
 
-app.get('/api/logout', 
-  cookieController.clearCookie, 
+app.get('/api/logout',
+  cookieController.clearCookie,
   (req, res) => {
     res.end();
-});
+  });
 
 app.get('/api/update')
 app.post('/api/addExchange')
