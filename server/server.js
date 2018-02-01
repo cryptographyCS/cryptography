@@ -17,13 +17,14 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use(express.static(path.resolve(__dirname, '../build')));
-app.use(cookieController.checkForCookie);
+app.all(cookieController.checkForCookie);
 
 app.post('/api/login',
   authController.getUser,
   authController.validateUser,
   cookieController.addCookie,
   (req, res) => {
+    console.log('resdotlocalss is: ', res.locals)
     res.json(res.locals.result);
   });
 
@@ -39,7 +40,13 @@ app.get('/api/logout',
     res.end();
   });
 
-app.get('/api/update', exchangeController.getUserExchanges);
+app.get('/api/update', ((req, res, next) => {
+  console.log('update middleware')
+  console.log('cookie is: ', req.cookies)
+  console.log('res.locals.sessionUser is: ', res.locals.sessionUser);
+  next();
+}), exchangeController.getUserExchanges);
+
 app.post('/api/addExchange', exchangeController.addExchange);
 
 // route for coinbase OAuth

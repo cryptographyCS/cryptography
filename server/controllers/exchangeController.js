@@ -14,11 +14,13 @@ exchangeController.addExchange = (req, res, next) => {
 }
 
 exchangeController.getUserExchanges = (req, res, next) => {
+  console.log('res.locals is: ', res.locals)
+  console.log('res.locals.sessionUser is: ', res.locals.sessionUser);
   db.query(
     queryStrings.GET_USER_EXCHANGES,
-    [res.locals.sessionUsers]
+    [res.locals.sessionUser]
   ).then(result => {
-    console.log(result);
+    // console.log(result);
     //iterate thru array and make api calls accordingly
   }).catch(err => console.error('Cannot get user exchanges: ', err))
 }
