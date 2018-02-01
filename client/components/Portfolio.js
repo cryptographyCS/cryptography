@@ -52,7 +52,7 @@ class Portfolio extends Component {
     if (!this.state.sortedNum) {
       this.setState((prevState) => {
         const coinsSorted = prevState.coins.sort((a, b) => {
-          const sortedInt =  (a.priceBTC * a.amount) - (b.priceBTC * b.amount);
+          const sortedInt = (a.priceBTC * a.amount) - (b.priceBTC * b.amount);
           return sortedInt;
         });
         return { coins: coinsSorted, sortedNum: !prevState.sortedNum };
