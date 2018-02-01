@@ -21,4 +21,11 @@ cookieController.addCookie = (req, res, next) => {
   next();
 };
 
+cookieController.clearCookie = (req, res, next) => {
+  console.log('CLEAR COOKIE');
+  const token = req.cookies.token;
+  res.clearCookie('token', token);
+  next();
+};
+
 module.exports = cookieController;
