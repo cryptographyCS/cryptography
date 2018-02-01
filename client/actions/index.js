@@ -19,6 +19,7 @@ const signUpUser = (state) => {
     return fetch('/api/signup', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({ username, password, email })
     })
       .then(response => response.json())
@@ -36,6 +37,7 @@ const signInUser = (props) => {
     fetch('/api/login', {
       method: 'POST',
       headers: { 'Content-type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({ username, password })
     })
       .then(response => response.json())
