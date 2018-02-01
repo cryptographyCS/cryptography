@@ -35,6 +35,8 @@ class Portfolio extends Component {
     console.log('fetching')
     fetch('/api/update', {
       method: 'GET',
+      headers: { 'Content-type': 'application/json' },
+      credentials: 'include',
     })
       .then(response => response.json())
       .then(response => this.setState({coins: response}))
