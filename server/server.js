@@ -37,6 +37,9 @@ app.get('/api/logout',
     res.end();
 });
 
+app.get('/api/update')
+app.post('/api/addExchange')
+
 // route for coinbase OAuth
 app.get('/coinbase/auth', (req, res) => {
   res.redirect(apiController.coinbase_authURL);
