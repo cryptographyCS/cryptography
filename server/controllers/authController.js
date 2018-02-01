@@ -16,10 +16,7 @@ authController.signup = (req, res, next) => {
     'INSERT INTO users (username, password, last_active, email) VALUES ($1, $2, $3, $4) RETURNING *;',
     [req.body.username, password, date, req.body.email]
   ).then(result => {
-      // const token = jwt.sign({ username: result.rows[0].username }, JWT_SECRET, { algorithm: 'RS256'});
-      
       res.locals.result = result.rows[0];
-      // res.cookie('token', token);
       next();
     } 
   ).catch(err => {
@@ -42,7 +39,7 @@ authController.getUser = (req, res, next) => {
 authController.validateUser = (req, res, next) => {
   const user = res.locals.result;
   if (!user || !(bcrypt.compareSync(req.body.password, user.password))) {
-    console.error('user was not validated');
+    console.error('User was not validated');
     res.status(401).end();
   } else {
     next();
