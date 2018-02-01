@@ -66,8 +66,7 @@ export class Login extends Component {
         </div>
         <div id='line'> <hr /> </div>
         <div id='registration-section'>
-          <hr />
-          <div>Register</div>
+          <div id="registration-text"> Sign up to track your entire crypto portfolio in one place. </div>
           <Registration
             signUpUser={this.props.signUpUser}
             signInUser={this.props.signInUser}
