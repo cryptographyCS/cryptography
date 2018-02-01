@@ -130,7 +130,7 @@ class Portfolio extends Component {
       return <Redirect to="/" />
     }
     return (
-      <div className='portfolio'>
+      <div className='app'>
         <button id='logout' onClick={() => this.props.signOutUser(this.props)}>Log Out</button>
         <Link to='/settings' className='header-navigate'>Settings </Link>
         <span id='refresh' onClick={this.updateCoins.bind(this)}> Refresh </span>

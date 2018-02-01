@@ -119,7 +119,7 @@ class Registration extends Component {
         <div>
           <input
             ref="username"
-            className="username"
+            className="username auth-input"
             type="text"
             placeholder="Username"
             onChange={() => this.handleInputChange('username')}
@@ -131,7 +131,7 @@ class Registration extends Component {
         <div>
           <input
             ref="password"
-            className="password"
+            className="password auth-input"
             type="password"
             placeholder="Password"
             onChange={() => this.handleInputChange('password')}
@@ -143,7 +143,7 @@ class Registration extends Component {
         <div>
           <input
             ref="passwordMatch"
-            className="password"
+            className="password auth-input"
             type="password"
             placeholder="Confirm Password"
             onChange={() => this.handleInputChange('passwordMatch')}
@@ -158,7 +158,7 @@ class Registration extends Component {
         <div>
           <input
             ref="email"
-            className="email"
+            className="email auth-input"
             type="email"
             placeholder="Email Address"
             onChange={() => this.handleInputChange('email')}
@@ -169,7 +169,7 @@ class Registration extends Component {
         </div>
         <div>
           <button
-            className="submit"
+            className="submit auth-input"
             type="submit"
             disabled={this.isDisabled()}
             onClick={this.onSubmit}

@@ -55,12 +55,16 @@ export class Login extends Component {
           cryptography
         </div>
         <div className='login'>
-          <input className='username' onChange={event => this.handleUser(event)} type='text' placeholder='username' />
-          <input className='password' onChange={event => this.handlePassword(event)} type='password' placeholder='password' />
+          <div>
+            <input className='username auth-input' onChange={event => this.handleUser(event)} type='text' placeholder='username' />
+          </div>
+          <div>
+            <input className='password auth-input' onChange={event => this.handlePassword(event)} type='password' placeholder='password' />
+          </div>
           <button className='submit' onClick={() => this.props.signInUser(this.state)}>log in</button>
           {
             this.props.error.signin &&
-            <div style={{ color: '#9F2738' }}><em>{this.props.error.signin}</em></div>
+            <div style={{ color: '#9F2738', marginBottom: '10px' }}><em>{this.props.error.signin}</em></div>
           }
           <Link to='/portfolio' id='forgot' >forgot password?</Link>
         </div>
