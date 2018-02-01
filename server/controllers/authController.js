@@ -1,10 +1,8 @@
 require('dotenv').config();
 const db = require('../model');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 
 const SALT_WORK_FACTOR = 10;
-const JWT_SECRET = process.env.JWT_SECRET;
 
 const authController = {};
 
