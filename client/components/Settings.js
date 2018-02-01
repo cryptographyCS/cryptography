@@ -14,6 +14,7 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     signOutUser: actions.signOutUser,
+    addExchange: actions.addExchange,
   }, dispatch)
 };
 
@@ -48,25 +49,25 @@ class Settings extends Component {
           <a href='/coinbase/auth' target="_blank"><img className='logo-img' src={require('./../img/coinbase.png')} alt='Coinbase' /></a>
           
           <img onClick={this.togglePopup.bind(this, 'Poloniex')} className='logo-img' src={require('./../img/poloniex.png')} alt='Poloniex' />
-          {this.state.Poloniex ? <APIForm exchange='Poloniex' url={'https://poloniex.com/'} closePopup={this.togglePopup.bind(this)}/> : null}
+          {this.state.Poloniex ? <APIForm addExchange={this.props.addExchange} exchange='Poloniex' url={'https://poloniex.com/'} closePopup={this.togglePopup.bind(this)}/> : null}
           
           <img onClick={this.togglePopup.bind(this, 'Binance')} className='logo-img' src={require('./../img/binance.png')} alt='Binance' />
-          {this.state.Binance ? <APIForm exchange='Binance' url={'https://www.binance.com/'} closePopup={this.togglePopup.bind(this)}/> : null}
+          {this.state.Binance ? <APIForm addExchange={this.props.addExchange} exchange='Binance' url={'https://www.binance.com/'} closePopup={this.togglePopup.bind(this)}/> : null}
           
           <img onClick={this.togglePopup.bind(this, 'Yobit')} className='logo-img' src={require('./../img/yobit.png')} alt='Yobit' />
-          {this.state.Yobit ? <APIForm exchange='Yobit' url={'https://yobit.net/en/'} closePopup={this.togglePopup.bind(this)}/> : null}
+          {this.state.Yobit ? <APIForm addExchange={this.props.addExchange} exchange='Yobit' url={'https://yobit.net/en/'} closePopup={this.togglePopup.bind(this)}/> : null}
           
           <img onClick={this.togglePopup.bind(this, 'Kraken')} className='logo-img' src={require('./../img/kraken.png')} alt='Kraken' />
-          {this.state.Kraken ? <APIForm exchange='Kraken' url={'https://www.kraken.com/'} closePopup={this.togglePopup.bind(this)}/> : null}
+          {this.state.Kraken ? <APIForm addExchange={this.props.addExchange} exchange='Kraken' url={'https://www.kraken.com/'} closePopup={this.togglePopup.bind(this)}/> : null}
           
           <img onClick={this.togglePopup.bind(this, 'Kucoin')} className='logo-img' src={require('./../img/kucoin.png')} alt='Kucoin' />
-          {this.state.Kucoin ? <APIForm exchange='Kucoin' url={'https://www.kucoin.com/#/'} closePopup={this.togglePopup.bind(this)}/> : null}
+          {this.state.Kucoin ? <APIForm addExchange={this.props.addExchange} exchange='Kucoin' url={'https://www.kucoin.com/#/'} closePopup={this.togglePopup.bind(this)}/> : null}
           
           <img onClick={this.togglePopup.bind(this, 'Cryptopia')} className='logo-img' src={require('./../img/cryptopia.png')} alt='Cryptopia' />
-          {this.state.Cryptopia ? <APIForm exchange='Cryptopia' url={'https://www.cryptopia.co.nz/'} closePopup={this.togglePopup.bind(this)}/> : null}
+          {this.state.Cryptopia ? <APIForm addExchange={this.props.addExchange} exchange='Cryptopia' url={'https://www.cryptopia.co.nz/'} closePopup={this.togglePopup.bind(this)}/> : null}
           
           <img onClick={this.togglePopup.bind(this, 'Coinhouse')} className='logo-img' src={require('./../img/coinhouse.png')} alt='Coinhouse' />
-          {this.state.Coinhouse ? <APIForm exchange='Coinhouse' url={'http://coinhouse.eu/'} closePopup={this.togglePopup.bind(this)}/> : null}
+          {this.state.Coinhouse ? <APIForm addExchange={this.props.addExchange} exchange='Coinhouse' url={'http://coinhouse.eu/'} closePopup={this.togglePopup.bind(this)}/> : null}
         </div>
       </div>
     );
