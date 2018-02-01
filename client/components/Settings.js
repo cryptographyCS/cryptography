@@ -1,11 +1,33 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 /*eslint-disable*/
+
+const mapStateToProps = store => ({
+  authenticated: store.user.authenticated,
+});
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({
+    signOutUser: actions.signOutUser,
+  }, dispatch)
+};
+
 class Settings extends Component {
+  constructor(props) {
+    super(props);
+  }
+  
   render() {
+    if (!this.props.authenticated) {
+      return <Redirect to="/" />
+    }
     return (
       <div>
-        <Link to='/'><button id='logout'>Log Out</button></Link>
+        <button id='logout' onClick={() => this.props.signOutUser(this.props)}>Log Out</button>
         <Link className='header-navigate' to='/portfolio'>Portfolio</Link>
         <div id='settings-intro'>
           <p> Cryptography creates an aggregate view of your cryptocurrency portfolio.</p>
@@ -26,4 +48,5 @@ class Settings extends Component {
   }
 }
 
-export default Settings;
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);
+
