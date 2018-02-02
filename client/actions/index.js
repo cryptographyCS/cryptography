@@ -52,14 +52,16 @@ const signInUser = (props) => {
  * Sign out user
  */
 const signOutUser = () => {
+  console.log('SIGN OUT USER');
   return function (dispatch) {
-    return fetch('/api/logout', {
+    fetch('/api/logout', {
       method: 'GET',
       headers: { 'Content-type': 'application/json' },
       credentials: 'include',
     })
       .then(dispatch({ type: TYPES.UNAUTH_USER }))
-      .then(history.push('/'));
+      .then(history.push('/'))
+      .catch(err => console.log(`signOutUser error: ${err}`));
   }
 }
 
@@ -67,6 +69,7 @@ const signOutUser = () => {
  * Add an exchange in Settings
  */
 const addExchange = (props) => {
+  console.log('adding Exchange');
   const { exchange, apiKey, apiSecret } = props;
   return function (dispatch) {
     fetch('/api/addExchange', {

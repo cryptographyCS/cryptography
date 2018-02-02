@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router';
 import { render } from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -38,17 +37,25 @@ class Portfolio extends Component {
       credentials: 'include',
     })
       .then(response => response.json())
-      .then(response => this.setState({ coins: response }))
+      .then(response => {
+        // all logic for coins should be called in here probably
+        let amountBTC = 0;
+        response.map((coin) => {
+          amountBTC = amountBTC + coin.priceBTC * coin.amount;
+        });
+        this.setState({ total: (amountBTC).toFixed(5) })
+        this.setState({ coins: response })
+      })
       .catch(err => console.log('Error fetching coins'));
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
     if (this.state.coins.length === 0) this.updateCoins();
   }
 
   getBTCInDollars() {
-    // need to fetch the price
-    return 11354
+    // need to fetch the price. Need to use an API here
+    return 9354
   }
 
   filterAmount() {
@@ -119,6 +126,7 @@ class Portfolio extends Component {
         </div>
       )
     })
+    console.log('TOTAL', amountBTC)
     // could be added to componentDidUpdate
     if (this.state.total === 0) this.setState({ total: amountBTC.toFixed(5) });
     return coinsDiv;

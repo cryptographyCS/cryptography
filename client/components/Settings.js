@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
@@ -34,9 +33,6 @@ class Settings extends Component {
   }
 
   render() {
-    // if (!this.props.authenticated) {
-    //   return <Redirect to="/" />
-    // }
     return (
       <div className='app'>
         <button id='logout' onClick={() => this.props.signOutUser(this.props)}>Log Out</button>
@@ -46,7 +42,8 @@ class Settings extends Component {
           <p>  To include coins from an exchange, click the exchange to authorize Cryptography.</p>
         </div>
         <div id='settings-images'>
-          <a href='/coinbase/auth' target="_blank" style={{ margin: '0 auto' }}><img className='logo-img' src={require('./../img/coinbase.png')} alt='Coinbase' /></a>
+          <img onClick={this.togglePopup.bind(this, 'Coinbase')} className='logo-img' src={require('./../img/coinbase.png')} alt='Coinbase' />
+          {this.state.Coinbase ? <APIForm addExchange={this.props.addExchange} exchange='Coinbase' url={'http://coinbase.com/'} closePopup={this.togglePopup.bind(this)} /> : null}
 
           <img onClick={this.togglePopup.bind(this, 'Poloniex')} className='logo-img' src={require('./../img/poloniex.png')} alt='Poloniex' />
           {this.state.Poloniex ? <APIForm addExchange={this.props.addExchange} exchange='Poloniex' url={'https://poloniex.com/'} closePopup={this.togglePopup.bind(this)} /> : null}

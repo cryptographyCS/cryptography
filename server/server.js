@@ -17,16 +17,6 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use(express.static(path.resolve(__dirname, '../build')));
-
-// TODO: CATCH ALL MESSES UP COOKIES WITH HISTORY
-
-// app.get('*', cookieController.clearCookie, (req, res) => {
-//   res.sendFile(path.join(__dirname, '../build/index.html'));
-// });
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../build/index.html'));
-// });
-
 app.all(cookieController.checkForCookie);
 
 app.post('/api/login',
@@ -47,18 +37,17 @@ app.post('/api/signup',
 app.get('/api/logout',
   cookieController.clearCookie,
   (req, res) => {
-    console.log('**** COOKIE CLEARED ****');
     res.end();
   });
 
-app.get('/api/update', ((req, res, next) => {
+app.get('/api/update', cookieController.checkForCookie, ((req, res, next) => {
   console.log('update middleware')
   console.log('cookie is: ', req.cookies)
   console.log('res.locals.sessionUser is: ', res.locals.sessionUser);
   next();
 }), exchangeController.getUserExchanges);
 
-app.post('/api/addExchange', exchangeController.addExchange);
+app.post('/api/addExchange', cookieController.checkForCookie, exchangeController.addExchange);
 
 // route for coinbase OAuth
 app.get('/coinbase/auth', (req, res) => {
@@ -84,5 +73,10 @@ app.post('/binance/auth', (req, res) => {
 
 // insert middleware call to the database!
 // app.get('/coinbase/read', apiController.coinbase_read);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+});
+
 
 app.listen(3000, () => console.log('Server listening on port 3000'));
