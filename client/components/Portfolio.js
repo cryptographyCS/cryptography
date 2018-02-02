@@ -30,7 +30,7 @@ class Portfolio extends Component {
       coins: [],
     }
   }
-  
+
   updateCoins() {
     console.log('fetching')
     fetch('/api/update', {
@@ -39,10 +39,10 @@ class Portfolio extends Component {
       credentials: 'include',
     })
       .then(response => response.json())
-      .then(response => this.setState({coins: response}))
+      .then(response => this.setState({ coins: response }))
       .catch(err => console.log('Error fetching coins'));
-  } 
-  
+  }
+
   componentDidUpdate() {
     if (this.state.coins.length === 0) this.updateCoins();
   }
