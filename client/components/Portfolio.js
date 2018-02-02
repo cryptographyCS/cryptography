@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router';
 import { render } from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -8,7 +7,6 @@ import * as actions from '../actions';
 /*eslint-disable*/
 
 const mapStateToProps = store => ({
-  authenticated: store.user.authenticated,
   // coins: store.portfolio.coins,
 });
 
@@ -30,7 +28,7 @@ class Portfolio extends Component {
       coins: [],
     }
   }
-  
+
   updateCoins() {
     console.log('fetching')
     fetch('/api/update', {
@@ -40,17 +38,17 @@ class Portfolio extends Component {
     })
       .then(response => response.json())
       .then(response => {
-          // all logic for coins should be called in here probably
-          let amountBTC = 0;
-          response.map((coin) => {
-            amountBTC = amountBTC + coin.priceBTC * coin.amount;
-          });
-          this.setState({total: (amountBTC).toFixed(5)})
-          this.setState({coins: response})
+        // all logic for coins should be called in here probably
+        let amountBTC = 0;
+        response.map((coin) => {
+          amountBTC = amountBTC + coin.priceBTC * coin.amount;
+        });
+        this.setState({ total: (amountBTC).toFixed(5) })
+        this.setState({ coins: response })
       })
       .catch(err => console.log('Error fetching coins'));
-  } 
-  
+  }
+
   componentDidMount() {
     if (this.state.coins.length === 0) this.updateCoins();
   }
@@ -135,12 +133,6 @@ class Portfolio extends Component {
   }
 
   render() {
-    // Redirect to / after logging out
-    // better place to do this?
-    console.log(this.state.total)
-    if (!this.props.authenticated) {
-      return <Redirect to="/" />
-    }
     return (
       <div className='app'>
         <button id='logout' onClick={() => this.props.signOutUser(this.props)}>Log Out</button>

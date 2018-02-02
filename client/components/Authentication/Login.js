@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { Redirect } from 'react-router';
 import classNames from 'classnames';
 
 // export here for testing connected component
@@ -13,7 +12,8 @@ export class Login extends Component {
       errors: {},
       username: '',
       password: '',
-      success: false
+      success: false,
+      location: 'login'
     };
     this.onKeyPress = this.onKeyPress.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -96,11 +96,6 @@ export class Login extends Component {
 
   render() {
     const { errors } = this.state;
-    // Redirect to /portfolio after successful authentication
-    // better place to do this?
-    if (this.props.authenticated) {
-      return <Redirect to="/portfolio" />
-    }
     return (
       <form className='login-form' onKeyPress={this.onKeyPress}>
         <div className={classNames({ 'has-error': errors.username })}>

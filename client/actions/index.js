@@ -1,4 +1,5 @@
 import * as TYPES from '../constants/actionTypes';
+import history from '../history';
 
 /**
  * Error helper function
@@ -32,7 +33,7 @@ const signUpUser = (state) => {
  * Sign in user
  */
 const signInUser = (props) => {
-  const { username, password } = props;
+  const { username, password, location } = props;
   return function (dispatch) {
     return fetch('/api/login', {
       method: 'POST',
@@ -42,6 +43,7 @@ const signInUser = (props) => {
     })
       .then(response => response.json())
       .then(response => response.username ? dispatch({ type: TYPES.AUTH_USER }) : null)
+      .then(location === 'registration' ? history.push('/settings') : history.push('/portfolio'))
       .catch(err => dispatch(authError(TYPES.SIGNIN_ERROR, 'Authentication server error')));
   }
 }
@@ -50,6 +52,7 @@ const signInUser = (props) => {
  * Sign out user
  */
 const signOutUser = () => {
+  console.log('SIGN OUT USER');
   return function (dispatch) {
     fetch('/api/logout', {
       method: 'GET',
@@ -57,6 +60,8 @@ const signOutUser = () => {
       credentials: 'include',
     })
       .then(dispatch({ type: TYPES.UNAUTH_USER }))
+      .then(history.push('/'))
+      .catch(err => console.log(`signOutUser error: ${err}`));
   }
 }
 

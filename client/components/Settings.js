@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Redirect } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
@@ -34,9 +33,6 @@ class Settings extends Component {
   }
 
   render() {
-    if (!this.props.authenticated) {
-      return <Redirect to="/" />
-    }
     return (
       <div className='app'>
         <button id='logout' onClick={() => this.props.signOutUser(this.props)}>Log Out</button>

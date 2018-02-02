@@ -74,4 +74,9 @@ app.post('/binance/auth', (req, res) => {
 // insert middleware call to the database!
 // app.get('/coinbase/read', apiController.coinbase_read);
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+});
+
+
 app.listen(3000, () => console.log('Server listening on port 3000'));
