@@ -6,8 +6,8 @@ const exchangeController = {};
 
 exchangeController.addExchange = (req, res, next) => {
   db.query(
-    queryStrings.ADD_EXCHANGE,
-    [req.body.exchange, req.body.apiKey, date, req.body.apiSecret]
+    queryStrings.ADD_USER_EXCHANGE,
+    [(req.body.exchange).toLowerCase(), res.locals.sessionUser, req.body.apiKey, req.body.apiSecret]
   ).then(result => {
     next();
   }).catch(err => console.error('Error adding exchange: ', err));

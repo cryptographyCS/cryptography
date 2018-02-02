@@ -47,7 +47,7 @@ app.get('/api/update', ((req, res, next) => {
   next();
 }), exchangeController.getUserExchanges);
 
-app.post('/api/addExchange', exchangeController.addExchange);
+app.post('/api/addExchange', cookieController.checkForCookie, exchangeController.addExchange);
 
 // route for coinbase OAuth
 app.get('/coinbase/auth', (req, res) => {
