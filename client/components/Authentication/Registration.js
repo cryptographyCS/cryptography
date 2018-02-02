@@ -14,7 +14,8 @@ class Registration extends Component {
       password: '',
       passwordMatch: '',
       email: '',
-      success: false
+      success: false,
+      location: 'registration'
     };
     this.onKeyPress = this.onKeyPress.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -112,9 +113,9 @@ class Registration extends Component {
     const { errors } = this.state;
     // Redirect to /settings after successful registration
     // better place to do this?
-    if (this.state.success) {
-      return <Redirect to="/settings" />
-    }
+    // if (this.state.success) {
+    //   return <Redirect to="/settings" />
+    // }
     return (
       <form className="registration-form" onKeyPress={this.onKeyPress}>
         <div className={classNames({ 'has-error': errors.username })}>

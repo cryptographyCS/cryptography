@@ -13,7 +13,8 @@ export class Login extends Component {
       errors: {},
       username: '',
       password: '',
-      success: false
+      success: false,
+      location: 'login'
     };
     this.onKeyPress = this.onKeyPress.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -98,9 +99,9 @@ export class Login extends Component {
     const { errors } = this.state;
     // Redirect to /portfolio after successful authentication
     // better place to do this?
-    if (this.props.authenticated) {
-      return <Redirect to="/portfolio" />
-    }
+    // if (this.props.authenticated) {
+    //   return <Redirect to="/portfolio" />
+    // }
     return (
       <form className='login-form' onKeyPress={this.onKeyPress}>
         <div className={classNames({ 'has-error': errors.username })}>

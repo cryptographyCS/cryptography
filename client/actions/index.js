@@ -33,7 +33,7 @@ const signUpUser = (state) => {
  * Sign in user
  */
 const signInUser = (props) => {
-  const { username, password } = props;
+  const { username, password, location } = props;
   return function (dispatch) {
     return fetch('/api/login', {
       method: 'POST',
@@ -43,6 +43,7 @@ const signInUser = (props) => {
     })
       .then(response => response.json())
       .then(response => response.username ? dispatch({ type: TYPES.AUTH_USER }) : null)
+      .then(location === 'registration' ? history.push('/settings') : history.push('/portfolio'))
       .catch(err => dispatch(authError(TYPES.SIGNIN_ERROR, 'Authentication server error')));
   }
 }

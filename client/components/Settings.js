@@ -7,6 +7,10 @@ import * as actions from '../actions';
 import APIForm from './APIForm';
 /*eslint-disable*/
 
+const mapStateToProps = store => ({
+  authenticated: store.user.authenticated,
+});
+
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     signOutUser: actions.signOutUser,
@@ -30,6 +34,9 @@ class Settings extends Component {
   }
 
   render() {
+    // if (!this.props.authenticated) {
+    //   return <Redirect to="/" />
+    // }
     return (
       <div className='app'>
         <button id='logout' onClick={() => this.props.signOutUser(this.props)}>Log Out</button>
