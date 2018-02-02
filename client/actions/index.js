@@ -1,4 +1,5 @@
 import * as TYPES from '../constants/actionTypes';
+import history from '../history';
 
 /**
  * Error helper function
@@ -51,12 +52,13 @@ const signInUser = (props) => {
  */
 const signOutUser = () => {
   return function (dispatch) {
-    fetch('/api/logout', {
+    return fetch('/api/logout', {
       method: 'GET',
       headers: { 'Content-type': 'application/json' },
       credentials: 'include',
     })
       .then(dispatch({ type: TYPES.UNAUTH_USER }))
+      .then(history.push('/'));
   }
 }
 

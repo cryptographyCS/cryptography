@@ -40,6 +40,7 @@ app.post('/api/signup',
 app.get('/api/logout',
   cookieController.clearCookie,
   (req, res) => {
+    console.log('**** COOKIE CLEARED ****');
     res.end();
   });
 

@@ -8,7 +8,6 @@ import * as actions from '../actions';
 /*eslint-disable*/
 
 const mapStateToProps = store => ({
-  authenticated: store.user.authenticated,
   // coins: store.portfolio.coins,
 });
 
@@ -126,11 +125,6 @@ class Portfolio extends Component {
   }
 
   render() {
-    // Redirect to / after logging out
-    // better place to do this?
-    if (!this.props.authenticated) {
-      return <Redirect to="/" />
-    }
     return (
       <div className='app'>
         <button id='logout' onClick={() => this.props.signOutUser(this.props)}>Log Out</button>
