@@ -6,13 +6,14 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const cookieController = {};
 
 cookieController.checkForCookie = (req, res, next) => {
+  console.log('Checking for cookie');
   if (req.cookies.token) {
     console.log('COOKIE FOUND');
     const decoded = jwt.verify(req.cookies.token, JWT_SECRET);
     res.locals.sessionUser = decoded.username;
     console.log(res.locals.sessionUser);
   }
-  // else console.log('no cookie found');
+  else console.log('no cookie found');
   next();
 };
 

@@ -64,6 +64,7 @@ const signOutUser = () => {
  * Add an exchange in Settings
  */
 const addExchange = (props) => {
+  console.log('adding Exchange');
   const { exchange, apiKey, apiSecret } = props;
   return function (dispatch) {
     fetch('/api/addExchange', {

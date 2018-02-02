@@ -1,3 +1,5 @@
+// this is no longer used because we require a user's Coinbase's token. Otherwise, the token might expire.
+
 const url = require('url');
 const request = require('request');
 const path = require('path');
@@ -42,7 +44,7 @@ const coinbase_getToken = (req, res, next) => {
   }, (error, response, body) => {
     if (!error && response.statusCode == 200) {
       body = JSON.parse(body);
-
+      console.log('COINBASE', body);
       //store tokens in Database!!!!!
 
       //body.access_token

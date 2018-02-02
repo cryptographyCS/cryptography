@@ -40,14 +40,14 @@ app.get('/api/logout',
     res.end();
   });
 
-app.get('/api/update', ((req, res, next) => {
+app.get('/api/update', cookieController.checkForCookie, ((req, res, next) => {
   console.log('update middleware')
   console.log('cookie is: ', req.cookies)
   console.log('res.locals.sessionUser is: ', res.locals.sessionUser);
   next();
 }), exchangeController.getUserExchanges);
 
-app.post('/api/addExchange', exchangeController.addExchange);
+app.post('/api/addExchange', cookieController.checkForCookie, exchangeController.addExchange);
 
 // route for coinbase OAuth
 app.get('/coinbase/auth', (req, res) => {

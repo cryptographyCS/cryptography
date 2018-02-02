@@ -46,7 +46,8 @@ class Settings extends Component {
           <p>  To include coins from an exchange, click the exchange to authorize Cryptography.</p>
         </div>
         <div id='settings-images'>
-          <a href='/coinbase/auth' target="_blank" style={{ margin: '0 auto' }}><img className='logo-img' src={require('./../img/coinbase.png')} alt='Coinbase' /></a>
+          <img onClick={this.togglePopup.bind(this, 'Coinbase')} className='logo-img' src={require('./../img/coinbase.png')} alt='Coinbase' />
+          {this.state.Coinbase ? <APIForm addExchange={this.props.addExchange} exchange='Coinbase' url={'http://coinbase.com/'} closePopup={this.togglePopup.bind(this)} /> : null}
 
           <img onClick={this.togglePopup.bind(this, 'Poloniex')} className='logo-img' src={require('./../img/poloniex.png')} alt='Poloniex' />
           {this.state.Poloniex ? <APIForm addExchange={this.props.addExchange} exchange='Poloniex' url={'https://poloniex.com/'} closePopup={this.togglePopup.bind(this)} /> : null}
