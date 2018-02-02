@@ -1,3 +1,5 @@
+// this is no longer used because we require a user's Coinbase's token. Otherwise, the token might expire.
+
 const url = require('url');
 const request = require('request');
 const path = require('path');

@@ -40,7 +40,7 @@ app.get('/api/logout',
     res.end();
   });
 
-app.get('/api/update', ((req, res, next) => {
+app.get('/api/update', cookieController.checkForCookie, ((req, res, next) => {
   console.log('update middleware')
   console.log('cookie is: ', req.cookies)
   console.log('res.locals.sessionUser is: ', res.locals.sessionUser);
